@@ -4,18 +4,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
 @Entity
-public class Estudante {
+public class Funcionario {
 	private String nome;
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int codEstudante;
+	private int id;
 	
-	public Estudante(String nome, int codEstudante) {
+	public Funcionario(String nome, int codEstudante) {
 		super();
 		this.nome = nome;
-		this.codEstudante = codEstudante;
+		this.id = codEstudante;
 	}
 	public String getNome() {
 		return nome;
@@ -24,10 +23,10 @@ public class Estudante {
 		this.nome = nome;
 	}
 	public int getCodEstudante() {
-		return codEstudante;
+		return id;
 	}
 	public void setCodEstudante(int codEstudante) {
-		this.codEstudante = codEstudante;
+		this.id = codEstudante;
 	}
 	
 }
