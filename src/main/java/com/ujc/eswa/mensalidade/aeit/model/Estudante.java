@@ -17,6 +17,11 @@ public class Estudante {
 		this.nome = nome;
 		this.codEstudante = codEstudante;
 	}
+	
+	public Estudante() {
+		super();
+	}
+
 	public String getNome() {
 		return nome;
 	}
