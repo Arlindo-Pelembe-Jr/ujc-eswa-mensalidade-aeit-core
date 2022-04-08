@@ -1,38 +1,54 @@
 package com.ujc.eswa.mensalidade.aeit.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import java.sql.Date;
 
+import javax.persistence.*;
 @Entity
-public class Estudante {
-	private String nome;
+@Table(name="Estudante")
+public class Estudante extends BaseEntity {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8519710901493485449L;
+	@Column(name="data_ingresso")
+	private Date data_ingresso;
+	@Column(name="cod_estudante")
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int codEstudante;
-	
-	public Estudante(String nome, int codEstudante) {
-		super();
-		this.nome = nome;
-		this.codEstudante = codEstudante;
-	}
-	
-	public Estudante() {
-		super();
+	private int cod_estudante;
+	@ManyToOne
+	@JoinColumn(name="curso_id_fk")
+	private Curso curso ;
+
+	public Estudante(int id, String nome, String apelido, Date data_nascimento, double contacto, Sexo sexo,
+			String nacionalidade, Date data_ingresso, int cod_estudante, Curso curso) {
+		this.data_ingresso = data_ingresso;
+		this.cod_estudante = cod_estudante;
+		this.curso = curso;
 	}
 
-	public String getNome() {
-		return nome;
+	public int getCod_estudante() {
+		return cod_estudante;
 	}
-	public void setNome(String nome) {
-		this.nome = nome;
+
+	public void setCod_estudante(int cod_estudante) {
+		this.cod_estudante = cod_estudante;
 	}
-	public int getCodEstudante() {
-		return codEstudante;
+
+	public Date getData_ingresso() {
+		return data_ingresso;
 	}
-	public void setCodEstudante(int codEstudante) {
-		this.codEstudante = codEstudante;
+
+
+	public void setData_ingresso(Date data_ingresso) {
+		this.data_ingresso = data_ingresso;
 	}
-	
+
+	public Curso getCurso() {
+		return curso;
+	}
+
+	public void setCurso(Curso curso) {
+		this.curso = curso;
+	}
 }

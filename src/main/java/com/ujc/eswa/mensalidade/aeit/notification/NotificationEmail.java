@@ -9,7 +9,7 @@ public class NotificationEmail implements Notification{
 	@Override
 	public void notify(Estudante estudante, String message) {
 		// TODO Auto-generated method stub
-		System.out.printf("Estudante notificado nome: %s por email",estudante.getNome());
+//		System.out.printf("Estudante notificado nome: %s por email",estudante.getNome());
 	}
 
 }

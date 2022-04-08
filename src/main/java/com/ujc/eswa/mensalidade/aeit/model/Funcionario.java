@@ -1,32 +1,33 @@
 package com.ujc.eswa.mensalidade.aeit.model;
 
-import javax.persistence.Entity;
+import java.sql.Date;
+
+import javax.persistence.*;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 @Entity
-public class Funcionario {
-	private String nome;
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+@Table(name="funcionario")
+public class Funcionario extends BaseEntity {
+	private static final long serialVersionUID = 5314332179792881532L;
+	@Column(name="data_ingresso_funcionario")
+	private Date data_ingresso_funcionario;
+
+	public Date getData_ingresso() {
+		return data_ingresso_funcionario;
+	}
+
+	public void setData_ingresso(Date data_ingresso) {
+		this.data_ingresso_funcionario = data_ingresso;
+	}
+
+	public Funcionario(int id, String nome, String apelido, Date data_nascimento, double contacto, Sexo sexo,
+			String nacionalidade, Date data_ingresso) {
+		this.data_ingresso_funcionario = data_ingresso;
+	}
 	
-	public Funcionario(String nome, int codEstudante) {
-		super();
-		this.nome = nome;
-		this.id = codEstudante;
-	}
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-	public int getCodEstudante() {
-		return id;
-	}
-	public void setCodEstudante(int codEstudante) {
-		this.id = codEstudante;
-	}
+	
+
+
 	
 }
