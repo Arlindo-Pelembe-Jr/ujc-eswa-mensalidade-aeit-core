@@ -11,9 +11,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 @Entity
-public  class Utilizador {
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+public  class Utilizador extends BaseEntity{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6622715455819268170L;
 	@Column(name="nome", nullable=false)
 	private String nome;
 	@Column(name="apelido", nullable=false)
@@ -27,11 +30,15 @@ public  class Utilizador {
 	private Sexo sexo;
 	@Column(name="nacionalidade", nullable=false)
 	private String nacionalidade;
-	public int getId() {
-		return id;
+	
+	private String senha;
+	
+	
+	public String getSenha() {
+		return senha;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 	public String getNome() {
 		return nome;
@@ -69,10 +76,12 @@ public  class Utilizador {
 	public void setNacionalidade(String nacionalidade) {
 		this.nacionalidade = nacionalidade;
 	}
-	public Utilizador(int id, String nome, String apelido, Date data_nascimento, double contacto, Sexo sexo,
+	public Utilizador () {
+		
+	}
+	public Utilizador(Long id, String nome, String apelido, Date data_nascimento, double contacto, Sexo sexo,
 			String nacionalidade) {
 		super();
-		this.id = id;
 		this.nome = nome;
 		this.apelido = apelido;
 		this.dataNascimento = data_nascimento;
@@ -81,30 +90,35 @@ public  class Utilizador {
 		this.nacionalidade = nacionalidade;
 	}
 	@Override
-	public String toString() {
-		return "Utilizador [id=" + id + ", nome=" + nome + ", apelido=" + apelido + ", data_nascimento="
-				+ dataNascimento + ", contacto=" + contacto + ", sexo=" + sexo + ", nacionalidade=" + nacionalidade
-				+ "]";
-	}
-	@Override
 	public int hashCode() {
-		return Objects.hash(apelido, contacto, dataNascimento, id, nacionalidade, nome, sexo);
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Objects.hash(apelido, contacto, dataNascimento, nacionalidade, nome, senha, sexo);
+		return result;
 	}
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		Utilizador other = (Utilizador) obj;
 		return Objects.equals(apelido, other.apelido)
 				&& Double.doubleToLongBits(contacto) == Double.doubleToLongBits(other.contacto)
-				&& Objects.equals(dataNascimento, other.dataNascimento) && id == other.id
+				&& Objects.equals(dataNascimento, other.dataNascimento)
 				&& Objects.equals(nacionalidade, other.nacionalidade) && Objects.equals(nome, other.nome)
-				&& sexo == other.sexo;
+				&& Objects.equals(senha, other.senha) && sexo == other.sexo;
 	}
+	@Override
+	public String toString() {
+		return "Utilizador [nome=" + nome + ", apelido=" + apelido + ", dataNascimento=" + dataNascimento
+				+ ", contacto=" + contacto + ", sexo=" + sexo + ", nacionalidade=" + nacionalidade + ", senha=" + senha
+				+ "]";
+	}
+
+
 	
 
 }
