@@ -12,36 +12,48 @@ public class Estudante extends BaseEntity {
 	 */
 	private static final long serialVersionUID = -8519710901493485449L;
 	@Column(name="data_ingresso")
-	private Date data_ingresso;
-	@Column(name="cod_estudante")
-	@Id
-	private int cod_estudante;
+	private Date dataIgresso;
+	
+	private Long codEstudante;
+	private String nome;
 	@ManyToOne
 	@JoinColumn(name="curso_id_fk")
 	private Curso curso ;
 
-	public Estudante(int id, String nome, String apelido, Date data_nascimento, double contacto, Sexo sexo,
-			String nacionalidade, Date data_ingresso, int cod_estudante, Curso curso) {
-		this.data_ingresso = data_ingresso;
-		this.cod_estudante = cod_estudante;
+	public Estudante() {
+		super();
+	}
+
+	public Estudante(Long id, String nome, String apelido, Date data_nascimento, double contacto, Sexo sexo,
+			String nacionalidade, Date data_ingresso, Long cod_estudante, Curso curso) {
+		this.dataIgresso = data_ingresso;
+		this.codEstudante = cod_estudante;
 		this.curso = curso;
 	}
 
-	public int getCod_estudante() {
-		return cod_estudante;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setCod_estudante(int cod_estudante) {
-		this.cod_estudante = cod_estudante;
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public Long getCod_estudante() {
+		return codEstudante;
+	}
+
+	public void setCod_estudante(Long cod_estudante) {
+		this.codEstudante = cod_estudante;
 	}
 
 	public Date getData_ingresso() {
-		return data_ingresso;
+		return dataIgresso;
 	}
 
 
 	public void setData_ingresso(Date data_ingresso) {
-		this.data_ingresso = data_ingresso;
+		this.dataIgresso = data_ingresso;
 	}
 
 	public Curso getCurso() {

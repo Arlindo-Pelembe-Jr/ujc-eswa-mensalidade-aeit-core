@@ -1,24 +1,12 @@
 package com.ujc.eswa.mensalidade.aeit.controller;
 
 
-import java.util.List;
-
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ujc.eswa.mensalidade.aeit.model.Estudante;
 import com.ujc.eswa.mensalidade.aeit.service.Service;
 
 @RestController
@@ -26,24 +14,19 @@ import com.ujc.eswa.mensalidade.aeit.service.Service;
 @CrossOrigin
 public class FirstController {
 	
-//	private Service service;
-////	@Autowired
-////	private EstudanteRepositorio estudanteRepositorio;
-//	public FirstController(Service service) {
-//		super();
-//		this.service = service;
-//	}
+	private Service service;
+
+	public FirstController(Service service) {
+		super();
+		this.service = service;
+	}
 
 	@GetMapping("/hello")
 	@ResponseBody
 	public String hello() {
 //		Estudante antonio = new Estudante("Antonio",1001);
 //		service.ative(antonio);
-//		List<Estudante> ests=estudanteRepositorio.findAll();
-		
-//		for (Estudante estudante : ests) {
-////			System.out.println("\nCod estudante:"+estudante.getCod_estudante() +"nome:"+estudante.getNome());
-//		}
+
 		return "Hello, Guys";
 	}
 //	@GetMapping("/students")

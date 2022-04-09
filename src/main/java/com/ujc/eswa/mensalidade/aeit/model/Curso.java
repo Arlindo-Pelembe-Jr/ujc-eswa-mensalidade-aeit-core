@@ -18,10 +18,10 @@ public class Curso {
 	private Departamento departamento;
 	
 	@Column(name="nome_curso")
-	private String nome_curso;
+	private String nomeCurso;
 	@Column(name="curso_codigo")
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int curso_codigo;
+	private Long cursoCodigo;
 	public Departamento getDepartamento() {
 		return departamento;
 	}
@@ -29,16 +29,16 @@ public class Curso {
 		this.departamento = departamento;
 	}
 	public String getNome_curso() {
-		return nome_curso;
+		return nomeCurso;
 	}
 	public void setNome_curso(String nome_curso) {
-		this.nome_curso = nome_curso;
+		this.nomeCurso = nome_curso;
 	}
-	public int getCurso_codigo() {
-		return curso_codigo;
+	public Long getCurso_codigo() {
+		return cursoCodigo;
 	}
-	public void setCurso_codigo(int curso_codigo) {
-		this.curso_codigo = curso_codigo;
+	public void setCurso_codigo(Long cursoCodigo) {
+		this.cursoCodigo = cursoCodigo;
 	}
 	@OneToMany(mappedBy="curso")
 	private List<Estudante> estudantes;
@@ -51,11 +51,11 @@ public class Curso {
 	public void setEstudantes(List<Estudante> estudantes) {
 		this.estudantes = estudantes;
 	}
-	public Curso(  String nome_curso, int curso_codigo) {
+	public Curso(  String nome_curso, Long curso_codigo) {
 	
 		this.departamento = departamento;
-		this.nome_curso = nome_curso;
-		this.curso_codigo = curso_codigo;
+		this.nomeCurso = nome_curso;
+		this.cursoCodigo = cursoCodigo;
 		//this.cursos = cursos;
 	}
 	

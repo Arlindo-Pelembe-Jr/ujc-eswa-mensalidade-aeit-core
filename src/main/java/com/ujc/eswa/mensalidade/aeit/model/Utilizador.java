@@ -19,7 +19,7 @@ public  class Utilizador {
 	@Column(name="apelido", nullable=false)
 	private String apelido;
 	@Column(name="data_nascimento", nullable=false)
-	private Date data_nascimento;
+	private Date dataNascimento;
 	@Column(name="contacto", nullable=false)
 	private double contacto;
 	@Column(name="sexo", nullable=false)
@@ -46,10 +46,10 @@ public  class Utilizador {
 		this.apelido = apelido;
 	}
 	public Date getData_nascimento() {
-		return data_nascimento;
+		return dataNascimento;
 	}
 	public void setData_nascimento(Date data_nascimento) {
-		this.data_nascimento = data_nascimento;
+		this.dataNascimento = data_nascimento;
 	}
 	public double getContacto() {
 		return contacto;
@@ -75,7 +75,7 @@ public  class Utilizador {
 		this.id = id;
 		this.nome = nome;
 		this.apelido = apelido;
-		this.data_nascimento = data_nascimento;
+		this.dataNascimento = data_nascimento;
 		this.contacto = contacto;
 		this.sexo = sexo;
 		this.nacionalidade = nacionalidade;
@@ -83,12 +83,12 @@ public  class Utilizador {
 	@Override
 	public String toString() {
 		return "Utilizador [id=" + id + ", nome=" + nome + ", apelido=" + apelido + ", data_nascimento="
-				+ data_nascimento + ", contacto=" + contacto + ", sexo=" + sexo + ", nacionalidade=" + nacionalidade
+				+ dataNascimento + ", contacto=" + contacto + ", sexo=" + sexo + ", nacionalidade=" + nacionalidade
 				+ "]";
 	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(apelido, contacto, data_nascimento, id, nacionalidade, nome, sexo);
+		return Objects.hash(apelido, contacto, dataNascimento, id, nacionalidade, nome, sexo);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -101,7 +101,7 @@ public  class Utilizador {
 		Utilizador other = (Utilizador) obj;
 		return Objects.equals(apelido, other.apelido)
 				&& Double.doubleToLongBits(contacto) == Double.doubleToLongBits(other.contacto)
-				&& Objects.equals(data_nascimento, other.data_nascimento) && id == other.id
+				&& Objects.equals(dataNascimento, other.dataNascimento) && id == other.id
 				&& Objects.equals(nacionalidade, other.nacionalidade) && Objects.equals(nome, other.nome)
 				&& sexo == other.sexo;
 	}

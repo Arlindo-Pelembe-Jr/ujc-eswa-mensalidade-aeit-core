@@ -7,32 +7,32 @@ import javax.persistence.*;
 public class Disciplina {
 	@Column(name="id_disciplina")
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id_disciplina;
+	private Long idDisciplina;
 	@Column(name="disc_nome")
-	private String disc_nome;
+	private String discNome;
 	@Column(name="disc_credito")
-	private int disc_credito;
+	private int discCredito;
 	@Column(name="estatuto")
 	private String estatuto;
 	//@ManyToMany(mappedBy="Professor")
 //	private Professor professor;
-	public int getId_disciplina() {
-		return id_disciplina;
+	public Long getId_disciplina() {
+		return idDisciplina;
 	}
-	public void setId_disciplina(int id_disciplina) {
-		this.id_disciplina = id_disciplina;
+	public void setId_disciplina(Long id_disciplina) {
+		this.idDisciplina = id_disciplina;
 	}
 	public String getDisc_nome() {
-		return disc_nome;
+		return discNome;
 	}
 	public void setDisc_nome(String disc_nome) {
-		this.disc_nome = disc_nome;
+		this.discNome = disc_nome;
 	}
 	public int getDisc_credito() {
-		return disc_credito;
+		return discCredito;
 	}
 	public void setDisc_credito(int disc_credito) {
-		this.disc_credito = disc_credito;
+		this.discCredito = disc_credito;
 	}
 	public String getEstatuto() {
 		return estatuto;

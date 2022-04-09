@@ -8,23 +8,23 @@ import javax.persistence.*;
 @Table(name="Departamento")
 public class Departamento {
 	@Column(name="nome_departamento")
-	private String nome_departamento;
+	private String nomeDepartamento;
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="cod_departamento")
-	private int cod_departamento;
+	private Long codDepartamento;
 	@OneToMany//(mappedBy="Curso")
 	private List<Curso>cursos;
 	public String getNome_departamento() {
-		return nome_departamento;
+		return nomeDepartamento;
 	}
 	public void setNome_departamento(String nome_departamento) {
-		this.nome_departamento = nome_departamento;
+		this.nomeDepartamento = nome_departamento;
 	}
-	public int getCod_departamento() {
-		return cod_departamento;
+	public Long getCod_departamento() {
+		return codDepartamento;
 	}
-	public void setCod_departamento(int cod_departamento) {
-		this.cod_departamento = cod_departamento;
+	public void setCod_departamento(Long cod_departamento) {
+		this.codDepartamento = cod_departamento;
 	}
 	public List<Curso> getCursos() {
 		return cursos;
