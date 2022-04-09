@@ -33,7 +33,7 @@ public  class Utilizador extends BaseEntity{
 	
 	private String senha;
 	
-	
+	private String userName;
 	public String getSenha() {
 		return senha;
 	}
