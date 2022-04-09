@@ -10,6 +10,25 @@ import javax.persistence.Id;
 @Table(name="funcionario")
 public class Funcionario extends BaseEntity {
 	private static final long serialVersionUID = 5314332179792881532L;
+	@ManyToOne
+	@JoinColumn(name="crgo_id_fk")
+	private Cargo cargo;
+	public Cargo getCargo() {
+		return cargo;
+	}
+
+	public void setCargo(Cargo cargo) {
+		this.cargo = cargo;
+	}
+
+	public Date getDataIngressoFuncionario() {
+		return dataIngressoFuncionario;
+	}
+
+	public void setDataIngressoFuncionario(Date dataIngressoFuncionario) {
+		this.dataIngressoFuncionario = dataIngressoFuncionario;
+	}
+
 	@Column(name="data_ingresso_funcionario")
 	private Date dataIngressoFuncionario;
 
@@ -25,6 +44,7 @@ public class Funcionario extends BaseEntity {
 			String nacionalidade, Date data_ingresso) {
 		this.dataIngressoFuncionario = data_ingresso;
 	}
+	
 	
 	
 

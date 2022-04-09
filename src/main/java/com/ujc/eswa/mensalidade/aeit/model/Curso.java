@@ -17,6 +17,9 @@ public class Curso {
 	@JoinColumn(name="id_departamento")
 	private Departamento departamento;
 	
+	@OneToMany
+	@JoinTable(name="disciplina_curso")
+	private List<Disciplina> disciplinas;
 	@Column(name="nome_curso")
 	private String nomeCurso;
 	@Column(name="curso_codigo")

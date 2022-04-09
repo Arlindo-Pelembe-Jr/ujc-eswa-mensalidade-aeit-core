@@ -12,7 +12,7 @@ public class Departamento {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="cod_departamento")
 	private Long codDepartamento;
-	@OneToMany//(mappedBy="Curso")
+	@OneToMany//(mappedBy="Departamento")
 	private List<Curso>cursos;
 	public String getNome_departamento() {
 		return nomeDepartamento;

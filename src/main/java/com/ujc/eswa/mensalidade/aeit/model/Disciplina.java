@@ -1,5 +1,7 @@
 package com.ujc.eswa.mensalidade.aeit.model;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -14,6 +16,45 @@ public class Disciplina {
 	private int discCredito;
 	@Column(name="estatuto")
 	private String estatuto;
+	@OneToMany
+	@JoinTable(name="inscricao")
+	private List<Estudante> estudantes;
+	
+	@OneToOne
+	@JoinTable(name="disciplina_curso")
+	private Curso curso;
+	public Curso getCurso() {
+		return curso;
+	}
+	public void setCurso(Curso curso) {
+		this.curso = curso;
+	}
+	public Long getIdDisciplina() {
+		return idDisciplina;
+	}
+	public void setIdDisciplina(Long idDisciplina) {
+		this.idDisciplina = idDisciplina;
+	}
+	public String getDiscNome() {
+		return discNome;
+	}
+	public void setDiscNome(String discNome) {
+		this.discNome = discNome;
+	}
+	public int getDiscCredito() {
+		return discCredito;
+	}
+	public void setDiscCredito(int discCredito) {
+		this.discCredito = discCredito;
+	}
+	
+	
+	public List<Estudante> getEstudantes() {
+		return estudantes;
+	}
+	public void setEstudantes(List<Estudante> estudantes) {
+		this.estudantes = estudantes;
+	}
 	//@ManyToMany(mappedBy="Professor")
 //	private Professor professor;
 	public Long getId_disciplina() {

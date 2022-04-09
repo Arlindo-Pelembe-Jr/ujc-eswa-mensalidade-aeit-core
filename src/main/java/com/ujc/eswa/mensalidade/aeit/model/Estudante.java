@@ -1,6 +1,7 @@
 package com.ujc.eswa.mensalidade.aeit.model;
 
 import java.sql.Date;
+import java.util.List;
 
 import javax.persistence.*;
 @Entity
@@ -19,6 +20,40 @@ public class Estudante extends BaseEntity {
 	@ManyToOne
 	@JoinColumn(name="curso_id_fk")
 	private Curso curso ;
+	
+	@OneToOne()
+	@JoinTable(name="inscricao")
+	private Disciplina disciplina;
+
+
+
+	
+
+	public Disciplina getDisciplina() {
+		return disciplina;
+	}
+
+	public void setDisciplina(Disciplina disciplina) {
+		this.disciplina = disciplina;
+	}
+
+	public Date getDataIgresso() {
+		return dataIgresso;
+	}
+
+	public void setDataIgresso(Date dataIgresso) {
+		this.dataIgresso = dataIgresso;
+	}
+
+	public Long getCodEstudante() {
+		return codEstudante;
+	}
+
+	public void setCodEstudante(Long codEstudante) {
+		this.codEstudante = codEstudante;
+	}
+
+
 
 	public Estudante() {
 		super();
