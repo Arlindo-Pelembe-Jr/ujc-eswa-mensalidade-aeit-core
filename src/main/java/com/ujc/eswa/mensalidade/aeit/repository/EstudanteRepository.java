@@ -12,4 +12,6 @@ public interface EstudanteRepository extends JpaRepository<Estudante,Long>{
 	public List<Estudante> findAll();
 	
 	public Estudante findByCodEstudante(Long codEstudante);
+	
+//	public Estudante findByIdEstudante(Long id);
 }
