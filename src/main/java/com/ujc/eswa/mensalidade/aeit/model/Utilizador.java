@@ -1,15 +1,10 @@
 package com.ujc.eswa.mensalidade.aeit.model;
 
-import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 
 import javax.persistence.*;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
 @Entity
 public  class Utilizador extends BaseEntity{
 
@@ -17,23 +12,37 @@ public  class Utilizador extends BaseEntity{
 	 * 
 	 */
 	private static final long serialVersionUID = 6622715455819268170L;
-	@Column(name="nome", nullable=false)
+	@Column(name="nome")
 	private String nome;
-	@Column(name="apelido", nullable=false)
+	@Column(name="apelido")
 	private String apelido;
-	@Column(name="data_nascimento", nullable=false)
+	@Column(name="data_nascimento")
 	private Date dataNascimento;
-	@Column(name="contacto", nullable=false)
+	@Column(name="contacto")
 	private double contacto;
-	@Column(name="sexo", nullable=false)
+	@Column(name="sexo")
 	@Enumerated(EnumType.STRING)
 	private Sexo sexo;
-	@Column(name="nacionalidade", nullable=false)
+	@Column(name="nacionalidade")
 	private String nacionalidade;
-	
+	@Column
 	private String senha;
-	
+	@Column
 	private String userName;
+	
+	
+	public Date getDataNascimento() {
+		return dataNascimento;
+	}
+	public void setDataNascimento(Date dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 	public String getSenha() {
 		return senha;
 	}
