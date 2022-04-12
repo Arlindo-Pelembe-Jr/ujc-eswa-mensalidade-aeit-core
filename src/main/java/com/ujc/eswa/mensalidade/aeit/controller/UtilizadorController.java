@@ -37,17 +37,17 @@ public class UtilizadorController {
 		
 		return ResponseEntity.ok().body(user);
 	}
-//	@GetMapping("/{id}/{senha}")
-//	public ResponseEntity<Utilizador> authetication(@PathVariable Long id,@PathVariable String senha ) throws ResourceNotFoundException {
-////		Utilizador user= userRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Utilizador nao encontrado"+id));
-////		userRepository.findBySenhaUtilizador(senha);
-//		Utilizador user=utilizadorRepository.findByIdAndSenhaUtilizador(id, senha);
-////		if(user.getSenha() == senha) {
-//			return ResponseEntity.ok().body(user);
-////
-////		}
-////		return ResponseEntity.notFound().build();
-//	}
+	@GetMapping("/{id}/{senha}/search")
+	public ResponseEntity<Utilizador> authetication(@PathVariable Long id,@PathVariable String senha ) throws ResourceNotFoundException {
+//		Utilizador user= userRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Utilizador nao encontrado"+id));
+//		userRepository.findBySenhaUtilizador(senha);
+		Utilizador user=utilizadorRepository.findByIdAndSenhaUtilizador(id, senha);
+//		if(user.getSenha() == senha) {
+			return ResponseEntity.ok().body(user);
+//
+//		}
+//		return ResponseEntity.notFound().build();
+	}
 	
 	@PostMapping
 	public Utilizador sigin(@RequestBody Utilizador utilizador) {

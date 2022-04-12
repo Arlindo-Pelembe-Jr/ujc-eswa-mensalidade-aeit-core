@@ -35,7 +35,7 @@ public class EstudanteController {
 	public Estudante getStudentByCode(@PathVariable Long codEstudante) {
 		return  estudanteRepository.findByCodEstudante(codEstudante);
 	}
-	@GetMapping("/{id}")
+	@GetMapping("/{id}/estudante")
 	public ResponseEntity<Estudante> getStudentById(@PathVariable Long id) throws ResourceNotFoundException  {
 		Estudante student= estudanteRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Estudante nao encontrado com id:"+id));
 		
