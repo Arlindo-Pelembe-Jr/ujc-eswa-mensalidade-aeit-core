@@ -37,6 +37,12 @@ public class UtilizadorController {
 		
 		return ResponseEntity.ok().body(user);
 	}
+	
+	@GetMapping("/login/{email}/{senha}")
+	public ResponseEntity<Utilizador> authUser(@PathVariable String  email,@PathVariable String senha){
+		Utilizador userUtilizador = utilizadorRepository.findByEmailAndSenhaUtilizador(email, senha);
+		return ResponseEntity.ok().body(userUtilizador);
+	}
 	@GetMapping("/{id}/{senha}/search")
 	public ResponseEntity<Utilizador> authetication(@PathVariable Long id,@PathVariable String senha ) throws ResourceNotFoundException {
 //		Utilizador user= userRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Utilizador nao encontrado"+id));

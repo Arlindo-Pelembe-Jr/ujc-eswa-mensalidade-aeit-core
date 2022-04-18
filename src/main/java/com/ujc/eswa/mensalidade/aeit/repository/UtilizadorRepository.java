@@ -20,6 +20,8 @@ public interface UtilizadorRepository extends JpaRepository<Utilizador, Long>{
 	@Query(value="SELECT * FROM Utilizador WHERE id = id AND senha = senha", nativeQuery=true)
 	public Utilizador findByIdAndSenhaUtilizador(Long id,String senha);
 	
+	@Query(value="SELECT * FROM Utilizador WHERE email LIKE %:email% AND senha LIKE %:senha%", nativeQuery=true)
+	public Utilizador findByEmailAndSenhaUtilizador(@Param("email") String email,@Param("senha") String senha);
 	public Utilizador findBySenha(String senha);
 
 }

@@ -1,10 +1,11 @@
 package com.ujc.eswa.mensalidade.aeit.model;
 
 import java.sql.Date;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.*;
-import javax.persistence.Entity;
 @Entity
 public  class Utilizador extends BaseEntity{
 
@@ -14,28 +15,26 @@ public  class Utilizador extends BaseEntity{
 	private static final long serialVersionUID = 6622715455819268170L;
 	@Column(name="nome")
 	private String nome;
-	@Column(name="apelido")
-	private String apelido;
-	@Column(name="data_nascimento")
-	private Date dataNascimento;
-	@Column(name="contacto")
-	private double contacto;
-	@Column(name="sexo")
-	@Enumerated(EnumType.STRING)
-	private Sexo sexo;
-	@Column(name="nacionalidade")
-	private String nacionalidade;
+	
+
 	@Column
 	private String senha;
 	@Column
 	private String userName;
+	@Column
+	private String email;
 	
+	@OneToMany(mappedBy = "utilizador", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private Set<PerfilUtilizador> perfiSet =new HashSet<>();
 	
-	public Date getDataNascimento() {
-		return dataNascimento;
+	public String getEmail() {
+		return email;
 	}
-	public void setDataNascimento(Date dataNascimento) {
-		this.dataNascimento = dataNascimento;
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 	public String getUserName() {
 		return userName;
@@ -55,77 +54,16 @@ public  class Utilizador extends BaseEntity{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public String getApelido() {
-		return apelido;
-	}
-	public void setApelido(String apelido) {
-		this.apelido = apelido;
-	}
-	public Date getData_nascimento() {
-		return dataNascimento;
-	}
-	public void setData_nascimento(Date data_nascimento) {
-		this.dataNascimento = data_nascimento;
-	}
-	public double getContacto() {
-		return contacto;
-	}
-	public void setContacto(double contacto) {
-		this.contacto = contacto;
-	}
-	public Sexo getSexo() {
-		return sexo;
-	}
-	public void setSexo(Sexo sexo) {
-		this.sexo = sexo;
-	}
-	public String getNacionalidade() {
-		return nacionalidade;
-	}
-	public void setNacionalidade(String nacionalidade) {
-		this.nacionalidade = nacionalidade;
-	}
+
 	public Utilizador () {
 		
 	}
-	public Utilizador(Long id, String nome, String apelido, Date data_nascimento, double contacto, Sexo sexo,
-			String nacionalidade) {
+	public Utilizador(Long id, String nome) {
 		super();
 		this.nome = nome;
-		this.apelido = apelido;
-		this.dataNascimento = data_nascimento;
-		this.contacto = contacto;
-		this.sexo = sexo;
-		this.nacionalidade = nacionalidade;
+	
 	}
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + Objects.hash(apelido, contacto, dataNascimento, nacionalidade, nome, senha, sexo);
-		return result;
-	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Utilizador other = (Utilizador) obj;
-		return Objects.equals(apelido, other.apelido)
-				&& Double.doubleToLongBits(contacto) == Double.doubleToLongBits(other.contacto)
-				&& Objects.equals(dataNascimento, other.dataNascimento)
-				&& Objects.equals(nacionalidade, other.nacionalidade) && Objects.equals(nome, other.nome)
-				&& Objects.equals(senha, other.senha) && sexo == other.sexo;
-	}
-	@Override
-	public String toString() {
-		return "Utilizador [nome=" + nome + ", apelido=" + apelido + ", dataNascimento=" + dataNascimento
-				+ ", contacto=" + contacto + ", sexo=" + sexo + ", nacionalidade=" + nacionalidade + ", senha=" + senha
-				+ "]";
-	}
+
 
 
 	
