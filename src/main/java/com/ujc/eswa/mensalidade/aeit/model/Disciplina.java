@@ -16,10 +16,16 @@ public class Disciplina {
 	private int discCredito;
 	@Column(name="estatuto")
 	private String estatuto;
-	@OneToMany
+	@OneToOne
 	@JoinTable(name="inscricao")
-	private List<Estudante> estudantes;
+	private Estudante estudante;
 	
+	public Estudante getEstudante() {
+		return estudante;
+	}
+	public void setEstudante(Estudante estudante) {
+		this.estudante = estudante;
+	}
 	@OneToOne
 	@JoinTable(name="disciplina_curso")
 	private Curso curso;
@@ -49,12 +55,7 @@ public class Disciplina {
 	}
 	
 	
-	public List<Estudante> getEstudantes() {
-		return estudantes;
-	}
-	public void setEstudantes(List<Estudante> estudantes) {
-		this.estudantes = estudantes;
-	}
+	
 	//@ManyToMany(mappedBy="Professor")
 //	private Professor professor;
 	public Long getId_disciplina() {

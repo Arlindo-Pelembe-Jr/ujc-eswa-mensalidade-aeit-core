@@ -21,13 +21,24 @@ public class Estudante extends BaseEntity {
 	@JoinColumn(name="curso_id_fk")
 	private Curso curso ;
 	
-	@OneToOne()
+	public Renovacao getRenovacao() {
+		return renovacao;
+	}
+
+	public void setRenovacao(Renovacao renovacao) {
+		this.renovacao = renovacao;
+	}
+
+	@OneToOne
 	@JoinTable(name="inscricao")
 	private Disciplina disciplina;
-
-
-
 	
+	@OneToOne
+	@JoinTable(name="renovacao_estudante")
+	private Renovacao renovacao;
+
+
+
 
 	public Disciplina getDisciplina() {
 		return disciplina;

@@ -10,9 +10,36 @@ import javax.persistence.*;
 @Table(name="Curso")
 public class Curso {
 	
-
+	@OneToMany
+	@JoinTable(name="renovacao_estudante")
+	private List<Estudante>estudantes1;
 	
 
+	
+	public List<Estudante> getEstudantes1() {
+		return estudantes1;
+	}
+	public void setEstudantes1(List<Estudante> estudantes1) {
+		this.estudantes1 = estudantes1;
+	}
+	public List<Disciplina> getDisciplinas() {
+		return disciplinas;
+	}
+	public void setDisciplinas(List<Disciplina> disciplinas) {
+		this.disciplinas = disciplinas;
+	}
+	public String getNomeCurso() {
+		return nomeCurso;
+	}
+	public void setNomeCurso(String nomeCurso) {
+		this.nomeCurso = nomeCurso;
+	}
+	public Long getCursoCodigo() {
+		return cursoCodigo;
+	}
+	public void setCursoCodigo(Long cursoCodigo) {
+		this.cursoCodigo = cursoCodigo;
+	}
 	@ManyToOne
 	@JoinColumn(name="id_departamento")
 	private Departamento departamento;
@@ -43,6 +70,7 @@ public class Curso {
 	public void setCurso_codigo(Long cursoCodigo) {
 		this.cursoCodigo = cursoCodigo;
 	}
+	
 	@OneToMany(mappedBy="curso")
 	private List<Estudante> estudantes;
 	public String getNome_departamento() {
