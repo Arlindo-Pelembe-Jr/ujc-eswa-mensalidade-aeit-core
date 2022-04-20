@@ -1,6 +1,7 @@
 package com.ujc.eswa.mensalidade.aeit.model;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -52,6 +53,11 @@ public class Curso {
 	@Column(name="curso_codigo")
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long cursoCodigo;
+	
+	
+	public Curso() {
+		super();
+	}
 	public Departamento getDepartamento() {
 		return departamento;
 	}
@@ -72,10 +78,10 @@ public class Curso {
 	}
 	
 	@OneToMany(mappedBy="curso")
-	private List<Estudante> estudantes;
-	public String getNome_departamento() {
-		return getNome_departamento();
-	}
+	private List<Estudante> estudantes = new ArrayList<>();
+//	public String getNome_departamento() {   isto e um metodo recursivo chame a se mesmo e cria problema na pesquisa
+//		return getNome_departamento();
+//	}
 	public List<Estudante> getEstudantes() {
 		return estudantes;
 	}

@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name="Estudante")
 public class Estudante extends BaseEntity {
@@ -17,6 +19,7 @@ public class Estudante extends BaseEntity {
 	
 	private Long codEstudante;
 	private String nome;
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="curso_id_fk")
 	private Curso curso ;
