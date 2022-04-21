@@ -13,6 +13,12 @@ public class Funcionario extends BaseEntity {
 	@ManyToOne
 	@JoinColumn(name="crgo_id_fk")
 	private Cargo cargo;
+	
+	
+	public Funcionario() {
+		super();
+	}
+
 	public Cargo getCargo() {
 		return cargo;
 	}

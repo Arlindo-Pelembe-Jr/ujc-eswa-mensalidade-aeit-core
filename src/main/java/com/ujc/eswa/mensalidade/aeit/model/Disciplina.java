@@ -20,6 +20,11 @@ public class Disciplina {
 	@JoinTable(name="inscricao")
 	private Estudante estudante;
 	
+	
+	
+	public Disciplina() {
+		super();
+	}
 	public Estudante getEstudante() {
 		return estudante;
 	}

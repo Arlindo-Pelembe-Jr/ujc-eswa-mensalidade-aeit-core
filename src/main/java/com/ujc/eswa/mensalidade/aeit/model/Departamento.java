@@ -14,6 +14,12 @@ public class Departamento {
 	private Long codDepartamento;
 	@OneToMany//(mappedBy="Departamento")
 	private List<Curso>cursos;
+	
+	
+	
+	public Departamento() {
+		super();
+	}
 	public String getNome_departamento() {
 		return nomeDepartamento;
 	}

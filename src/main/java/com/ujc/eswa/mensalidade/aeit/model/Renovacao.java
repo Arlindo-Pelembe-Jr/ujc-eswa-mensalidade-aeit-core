@@ -33,6 +33,9 @@ public class Renovacao {
 	public void setCodRenovacao(Long codRenovacao) {
 		this.codRenovacao = codRenovacao;
 	}
+	public Renovacao() {
+		super();
+	}
 	
 	
 	

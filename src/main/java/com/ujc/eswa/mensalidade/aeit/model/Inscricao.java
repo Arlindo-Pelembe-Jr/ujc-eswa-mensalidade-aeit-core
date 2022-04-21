@@ -4,7 +4,7 @@ import java.sql.Date;
 
 import javax.persistence.*;
 
-public class Inscicao {
+
 	@Entity
 	@Table(name="inscricao")
 	public class Inscricao {
@@ -17,6 +17,11 @@ public class Inscicao {
 		private Long nota1;
 		@Column(name="nota2")
 		private Long nota2;
+		
+		
+		public Inscricao() {
+			super();
+		}
 		public Long getCodInscricao() {
 			return codInscricao;
 		}
@@ -59,4 +64,4 @@ public class Inscicao {
 		private Long media;
 		
 	}
-}
+

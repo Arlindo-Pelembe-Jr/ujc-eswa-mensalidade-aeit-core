@@ -6,6 +6,10 @@ import javax.persistence.*;
 @Table(name="professor")
 public class Professor extends BaseEntity{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7530573451565110721L;
 	@Column(name="tipo_professor")
 	private String profTipo;
 	@Column(name="nivel_academico")
@@ -13,5 +17,30 @@ public class Professor extends BaseEntity{
 	@ManyToOne
 	@JoinColumn(name="id_cargo_fk")
 	private Cargo cargo;
+	public String getProfTipo() {
+		return profTipo;
+	}
+	public void setProfTipo(String profTipo) {
+		this.profTipo = profTipo;
+	}
+	public String getNivelAcademico() {
+		return nivelAcademico;
+	}
+	public void setNivelAcademico(String nivelAcademico) {
+		this.nivelAcademico = nivelAcademico;
+	}
+	public Cargo getCargo() {
+		return cargo;
+	}
+	public void setCargo(Cargo cargo) {
+		this.cargo = cargo;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	public Professor() {
+		super();
+	}
+	
 	
 }
