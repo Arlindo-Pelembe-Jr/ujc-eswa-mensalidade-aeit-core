@@ -19,7 +19,7 @@ public class Estudante extends BaseEntity {
 	
 	private Long codEstudante;
 	private String nome;
-	@JsonIgnore
+//	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="curso_id_fk")
 	private Curso curso ;
@@ -112,4 +112,12 @@ public class Estudante extends BaseEntity {
 	public void setCurso(Curso curso) {
 		this.curso = curso;
 	}
+
+	@Override
+	public String toString() {
+		return "Estudante [dataIgresso=" + dataIgresso + ", codEstudante=" + codEstudante + ", nome=" + nome
+				+ ", curso=" + curso + ", disciplina=" + disciplina + ", renovacao=" + renovacao + "]";
+	}
+	
+	
 }

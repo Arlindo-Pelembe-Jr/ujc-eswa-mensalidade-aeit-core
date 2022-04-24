@@ -77,17 +77,17 @@ public class Curso {
 		this.cursoCodigo = cursoCodigo;
 	}
 	
-	@OneToMany(mappedBy="curso")
-	private List<Estudante> estudantes = new ArrayList<>();
+//	@OneToMany(mappedBy="curso")
+//	private List<Estudante> estudantes = new ArrayList<>();
 //	public String getNome_departamento() {   isto e um metodo recursivo chame a se mesmo e cria problema na pesquisa
 //		return getNome_departamento();
 //	}
-	public List<Estudante> getEstudantes() {
-		return estudantes;
-	}
-	public void setEstudantes(List<Estudante> estudantes) {
-		this.estudantes = estudantes;
-	}
+//	public List<Estudante> getEstudantes() {
+//		return estudantes;
+//	}
+//	public void setEstudantes(List<Estudante> estudantes) {
+//		this.estudantes = estudantes;
+//	}
 	public Curso(  String nome_curso, Long curso_codigo) {
 	
 		this.departamento = departamento;
