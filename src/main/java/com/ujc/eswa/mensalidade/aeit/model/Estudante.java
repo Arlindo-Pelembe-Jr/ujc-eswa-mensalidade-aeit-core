@@ -24,6 +24,8 @@ public class Estudante extends BaseEntity {
 	@JoinColumn(name="curso_id_fk")
 	private Curso curso ;
 	
+	@OneToMany
+	private List<Pagamento> pagamentos;
 	public Renovacao getRenovacao() {
 		return renovacao;
 	}
@@ -117,6 +119,14 @@ public class Estudante extends BaseEntity {
 	public String toString() {
 		return "Estudante [dataIgresso=" + dataIgresso + ", codEstudante=" + codEstudante + ", nome=" + nome
 				+ ", curso=" + curso + ", disciplina=" + disciplina + ", renovacao=" + renovacao + "]";
+	}
+
+	public List<Pagamento> getPagamentos() {
+		return pagamentos;
+	}
+
+	public void setPagamentos(List<Pagamento> pagamentos) {
+		this.pagamentos = pagamentos;
 	}
 	
 	
