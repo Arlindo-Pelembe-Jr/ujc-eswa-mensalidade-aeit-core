@@ -19,14 +19,13 @@ public class Estudante extends BaseEntity {
 	
 	private Long codEstudante;
 	private String nome;
-	@JsonIgnore
+//	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="curso_id_fk")
 	private Curso curso ;
 	
 	@ManyToMany(mappedBy="estudantes")
 	private List<Mensalidade> mensalidades;
-	
 
 	public List<Mensalidade> getMensalidades() {
 		return mensalidades;
@@ -42,6 +41,8 @@ public class Estudante extends BaseEntity {
 	
 	@ManyToMany(mappedBy="estudantes2")
 	private List <Curso> cursos;
+	
+
 
 
 
@@ -122,4 +123,14 @@ public class Estudante extends BaseEntity {
 	public void setCurso(Curso curso) {
 		this.curso = curso;
 	}
+
+	@Override
+	public String toString() {
+		return "Estudante [dataIgresso=" + dataIgresso + ", codEstudante=" + codEstudante + ", nome=" + nome
+				+ ", curso=" + curso + ", disciplina=" + disciplinas + ", renovacao=" + "]";
+	}
+
+
+	
+	
 }

@@ -15,6 +15,13 @@ public class Departamento {
 	@ManyToMany
 	@JoinTable(name="departamento_curso", joinColumns=@JoinColumn(name="departamento_id"), inverseJoinColumns=@JoinColumn(name="curso_id"))
 	private List <Curso> cursos;
+
+	
+	
+	
+	public Departamento() {
+		super();
+	}
 	public String getNome_departamento() {
 		return nomeDepartamento;
 	}

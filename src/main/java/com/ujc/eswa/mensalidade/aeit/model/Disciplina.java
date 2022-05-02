@@ -19,10 +19,16 @@ public class Disciplina {
 	@ManyToMany(mappedBy="disciplinas")
 	private List <Estudante> estudantes;
 	
-	
 	public List<Estudante> getEstudantes() {
 		return estudantes;
 	}
+
+	public Disciplina() {
+		super();
+	}
+	
+
+	
 	public void setEstudantes(List<Estudante> estudantes) {
 		this.estudantes = estudantes;
 	}

@@ -1,6 +1,9 @@
 package com.ujc.eswa.mensalidade.aeit.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +34,31 @@ public class EstudanteController {
 		return estudanteRepository.findAll();
 	}
 	
+	@GetMapping("/byCoures")
+	public ResponseEntity<List<Map<String, Object>>> listAllByCourse(){
+		List<Map<String, Object>> dataList = new ArrayList<>();
+//		Map<String, Object> dataObjectMap = new HashMap<>();
+//		dataObjectMap.put("key", "value");
+//		dataObjectMap.put("key1", "value1");
+//		dataObjectMap.put("key2", "value2");
+//
+//
+//		dataList.add(dataObjectMap);
+		
+		List<Estudante> studentsWithCourseEstudantes = estudanteRepository.findAll();
+		studentsWithCourseEstudantes.forEach(e->{
+//			System.out.println(e.getCursoInfo().getCurso().getNome_curso()+e.getCursoInfo().getCurso().getCursoCodigo()+e.getCursoInfo().getCurso().getNome_curso());
+			Map<String, Object> dataObjectMap = new HashMap<>();
+			dataObjectMap.put("id", e.getId());
+			dataObjectMap.put("nome", e.getNome());
+			dataObjectMap.put("cod_estudante", e.getCod_estudante());
+			dataObjectMap.put("curso", e.getCurso().getNome_curso());
+			dataObjectMap.put("curso_codigo", e.getCurso().getCursoCodigo());
+			dataList.add(dataObjectMap);
+
+		});
+		return ResponseEntity.ok().body(dataList);
+	}
 	@GetMapping("/{codEstudante}")
 	public Estudante getStudentByCode(@PathVariable Long codEstudante) {
 		return  estudanteRepository.findByCodEstudante(codEstudante);
