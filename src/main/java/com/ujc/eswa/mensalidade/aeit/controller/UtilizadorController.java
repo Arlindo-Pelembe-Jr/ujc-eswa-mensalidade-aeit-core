@@ -94,7 +94,7 @@ public class UtilizadorController {
 
 	@SuppressWarnings("unchecked")
 	@PostMapping("/role")
-	public ResponseEntity<List<Map<String, Object>>> siginBasedRole(@RequestBody Map<String, Object> userRole) {
+	public ResponseEntity<Map<String, Object>> siginBasedRole(@RequestBody Map<String, Object> userRole) {
 		System.out.println("userRole RequestBody: " + userRole);
 		List<Map<String, Object>> dataResponse = new ArrayList<>();
 //		System.out.println("To create current user: "+utilizador.getUserName());
@@ -139,6 +139,6 @@ public class UtilizadorController {
 		dataResponse.add(dataObjectMap);
 
 //		return utilizadorRepository.save(utilizador);
-		return ResponseEntity.ok().body(dataResponse);
+		return ResponseEntity.ok().body(dataObjectMap);
 	}
 }
