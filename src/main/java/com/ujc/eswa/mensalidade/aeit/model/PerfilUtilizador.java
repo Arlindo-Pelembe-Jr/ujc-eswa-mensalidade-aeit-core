@@ -47,6 +47,14 @@ public class PerfilUtilizador extends BaseEntity{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
+	public Utilizador getUtilizador() {
+		return utilizador;
+	}
+
+	public void setUtilizador(Utilizador utilizador) {
+		this.utilizador = utilizador;
+	}
 	
 	
 
