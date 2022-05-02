@@ -116,7 +116,7 @@ public class UtilizadorController {
 		Estudante createdStudent=new Estudante();
 		
 		createdStudent.setNome(studentMap.get("nome").toString());
-		createdStudent.setCod_estudante(Long.parseLong(studentMap.get("cod_estudante").toString()) );
+		createdStudent.setCod_estudante(estudanteRepository.findMaxCodEstudante()+1);
 		Map<String, Object> cursoMap = (Map<String, Object>) studentMap.get("curso");
 
 		createdStudent.setCurso(new Curso(Long.parseLong(cursoMap.get("cursoCodigo").toString()) ) );

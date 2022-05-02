@@ -47,7 +47,6 @@ public class EstudanteController {
 		
 		List<Estudante> studentsWithCourseEstudantes = estudanteRepository.findAll();
 		studentsWithCourseEstudantes.forEach(e->{
-			System.out.println(e.toString());
 //			System.out.println(e.getCursoInfo().getCurso().getNome_curso()+e.getCursoInfo().getCurso().getCursoCodigo()+e.getCursoInfo().getCurso().getNome_curso());
 			Map<String, Object> dataObjectMap = new HashMap<>();
 			dataObjectMap.put("id", e.getId());

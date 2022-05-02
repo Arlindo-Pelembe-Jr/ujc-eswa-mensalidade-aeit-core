@@ -14,5 +14,7 @@ public interface EstudanteRepository extends JpaRepository<Estudante,Long>{
 	
 	public Estudante findByCodEstudante(Long codEstudante);
 	
+	@Query(value = "SELECT max(codEstudante) FROM Estudante")
+	public Long findMaxCodEstudante();
 //	public Estudante findByIdEstudante(Long id);
 }
