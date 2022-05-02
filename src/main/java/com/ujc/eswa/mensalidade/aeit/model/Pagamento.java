@@ -14,7 +14,7 @@ public class Pagamento extends BaseEntity{
 	 * status de pagamento
 	 * 0-pago
 	 * 1-nao paga
-	 * 
+	 * 2-incompleta
 	 * */
 	private String dataPagamento;
 	private Long status;
