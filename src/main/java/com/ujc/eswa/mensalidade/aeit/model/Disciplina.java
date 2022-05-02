@@ -16,27 +16,27 @@ public class Disciplina {
 	private int discCredito;
 	@Column(name="estatuto")
 	private String estatuto;
-	@OneToOne
-	@JoinTable(name="inscricao")
-	private Estudante estudante;
+	@ManyToMany(mappedBy="disciplinas")
+	private List <Estudante> estudantes;
 	
-	public Estudante getEstudante() {
-		return estudante;
+	
+	public List<Estudante> getEstudantes() {
+		return estudantes;
 	}
-	public void setEstudante(Estudante estudante) {
-		this.estudante = estudante;
+	public void setEstudantes(List<Estudante> estudantes) {
+		this.estudantes = estudantes;
 	}
-	@OneToOne
-	@JoinTable(name="disciplina_curso")
-	private Curso curso;
-	public Curso getCurso() {
-		return curso;
-	}
-	public void setCurso(Curso curso) {
-		this.curso = curso;
-	}
+	@ManyToMany
+	@JoinTable(name="disciplina_curso", joinColumns=@JoinColumn(name="disciplina_id"), inverseJoinColumns=@JoinColumn(name="curso_id"))
+	private List <Curso> cursos;
 	public Long getIdDisciplina() {
 		return idDisciplina;
+	}
+	public List<Curso> getCursos() {
+		return cursos;
+	}
+	public void setCursos(List<Curso> cursos) {
+		this.cursos = cursos;
 	}
 	public void setIdDisciplina(Long idDisciplina) {
 		this.idDisciplina = idDisciplina;

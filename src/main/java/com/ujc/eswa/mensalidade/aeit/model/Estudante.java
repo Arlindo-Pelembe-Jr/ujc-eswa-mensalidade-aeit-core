@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
-@Table(name="Estudante")
+@Table(name="estudante")
 public class Estudante extends BaseEntity {
 
 	/**
@@ -24,31 +24,41 @@ public class Estudante extends BaseEntity {
 	@JoinColumn(name="curso_id_fk")
 	private Curso curso ;
 	
-	public Renovacao getRenovacao() {
-		return renovacao;
-	}
-
-	public void setRenovacao(Renovacao renovacao) {
-		this.renovacao = renovacao;
-	}
-
-	@OneToOne
-	@JoinTable(name="inscricao")
-	private Disciplina disciplina;
+	@ManyToMany(mappedBy="estudantes")
+	private List<Mensalidade> mensalidades;
 	
-	@OneToOne
-	@JoinTable(name="renovacao_estudante")
-	private Renovacao renovacao;
 
-
-
-
-	public Disciplina getDisciplina() {
-		return disciplina;
+	public List<Mensalidade> getMensalidades() {
+		return mensalidades;
 	}
 
-	public void setDisciplina(Disciplina disciplina) {
-		this.disciplina = disciplina;
+	public void setMensalidades(List<Mensalidade> mensalidades) {
+		this.mensalidades = mensalidades;
+	}
+
+	@ManyToMany
+	@JoinTable(name="inscricao", joinColumns=@JoinColumn(name="estudante_id"), inverseJoinColumns=@JoinColumn(name="disciplina_id"))
+	private List <Disciplina> disciplinas;
+	
+	@ManyToMany(mappedBy="estudantes2")
+	private List <Curso> cursos;
+
+
+
+	public List<Curso> getCursos() {
+		return cursos;
+	}
+
+	public void setCursos(List<Curso> cursos) {
+		this.cursos = cursos;
+	}
+
+	public List<Disciplina> getDisciplinas() {
+		return disciplinas;
+	}
+
+	public void setDisciplinas(List<Disciplina> disciplinas) {
+		this.disciplinas = disciplinas;
 	}
 
 	public Date getDataIgresso() {

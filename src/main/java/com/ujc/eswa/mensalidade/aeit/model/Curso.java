@@ -11,18 +11,25 @@ import javax.persistence.*;
 @Table(name="Curso")
 public class Curso {
 	
-	@OneToMany
-	@JoinTable(name="renovacao_estudante")
-	private List<Estudante>estudantes1;
+	@ManyToMany
+	@JoinTable(name="renovacao_estudante", joinColumns=@JoinColumn(name="curso_id"), inverseJoinColumns=@JoinColumn(name="estudante"))
+	private List<Estudante>estudantes2;
 	
 
 	
-	public List<Estudante> getEstudantes1() {
-		return estudantes1;
+	public List<Estudante> getEstudantes2() {
+		return estudantes2;
 	}
-	public void setEstudantes1(List<Estudante> estudantes1) {
-		this.estudantes1 = estudantes1;
+	public void setEstudantes2(List<Estudante> estudantes2) {
+		this.estudantes2 = estudantes2;
 	}
+	public List<Departamento> getDepartamentos() {
+		return departamentos;
+	}
+	public void setDepartamentos(List<Departamento> departamentos) {
+		this.departamentos = departamentos;
+	}
+	
 	public List<Disciplina> getDisciplinas() {
 		return disciplinas;
 	}
@@ -41,12 +48,11 @@ public class Curso {
 	public void setCursoCodigo(Long cursoCodigo) {
 		this.cursoCodigo = cursoCodigo;
 	}
-	@ManyToOne
-	@JoinColumn(name="id_departamento")
-	private Departamento departamento;
 	
-	@OneToMany
-	@JoinTable(name="disciplina_curso")
+	@ManyToMany(mappedBy="cursos")
+	private List <Departamento> departamentos;
+	
+	@ManyToMany(mappedBy="cursos")
 	private List<Disciplina> disciplinas;
 	@Column(name="nome_curso")
 	private String nomeCurso;
@@ -58,12 +64,7 @@ public class Curso {
 	public Curso() {
 		super();
 	}
-	public Departamento getDepartamento() {
-		return departamento;
-	}
-	public void setDepartamento(Departamento departamento) {
-		this.departamento = departamento;
-	}
+
 	public String getNome_curso() {
 		return nomeCurso;
 	}
@@ -90,7 +91,7 @@ public class Curso {
 	}
 	public Curso(  String nome_curso, Long curso_codigo) {
 	
-		this.departamento = departamento;
+	
 		this.nomeCurso = nome_curso;
 		this.cursoCodigo = cursoCodigo;
 		//this.cursos = cursos;

@@ -13,7 +13,7 @@ public class Inscicao {
 		private Long codInscricao;
 		@Column(name="data_inscricao")
 		private Date inscData;
-		@Column(name="nta1")
+		@Column(name="nota1")
 		private Long nota1;
 		@Column(name="nota2")
 		private Long nota2;

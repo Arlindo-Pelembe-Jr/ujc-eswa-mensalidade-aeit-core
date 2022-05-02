@@ -11,14 +11,16 @@ import javax.persistence.Id;
 public class Funcionario extends BaseEntity {
 	private static final long serialVersionUID = 5314332179792881532L;
 	@ManyToOne
-	@JoinColumn(name="crgo_id_fk")
-	private Cargo cargo;
+	@JoinColumn(name="cargo_id_fk")
+	private Cargo Cargo;
+
+
 	public Cargo getCargo() {
-		return cargo;
+		return Cargo;
 	}
 
 	public void setCargo(Cargo cargo) {
-		this.cargo = cargo;
+		this.Cargo = cargo;
 	}
 
 	public Date getDataIngressoFuncionario() {

@@ -12,8 +12,9 @@ public class Departamento {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="cod_departamento")
 	private Long codDepartamento;
-	@OneToMany//(mappedBy="Departamento")
-	private List<Curso>cursos;
+	@ManyToMany
+	@JoinTable(name="departamento_curso", joinColumns=@JoinColumn(name="departamento_id"), inverseJoinColumns=@JoinColumn(name="curso_id"))
+	private List <Curso> cursos;
 	public String getNome_departamento() {
 		return nomeDepartamento;
 	}
@@ -26,11 +27,6 @@ public class Departamento {
 	public void setCod_departamento(Long cod_departamento) {
 		this.codDepartamento = cod_departamento;
 	}
-	public List<Curso> getCursos() {
-		return cursos;
-	}
-	public void setCursos(List<Curso> cursos) {
-		this.cursos = cursos;
-	}
+
 	
 }
