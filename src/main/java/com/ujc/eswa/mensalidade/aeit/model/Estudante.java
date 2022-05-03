@@ -7,7 +7,6 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
-@Table(name="estudante")
 public class Estudante extends BaseEntity {
 
 	/**
@@ -21,10 +20,9 @@ public class Estudante extends BaseEntity {
 	private String nome;
 //	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name="curso_id_fk")
 	private Curso curso ;
 	
-	@ManyToMany(mappedBy="estudantes")
+	@ManyToMany
 	private List<Mensalidade> mensalidades;
 
 	public List<Mensalidade> getMensalidades() {
@@ -39,7 +37,7 @@ public class Estudante extends BaseEntity {
 	@JoinTable(name="inscricao", joinColumns=@JoinColumn(name="estudante_id"), inverseJoinColumns=@JoinColumn(name="disciplina_id"))
 	private List <Disciplina> disciplinas;
 	
-	@ManyToMany(mappedBy="estudantes2")
+	@ManyToMany
 	private List <Curso> cursos;
 	
 

@@ -1,17 +1,15 @@
 package com.ujc.eswa.mensalidade.aeit.model;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Curso")
 public class Curso {
 	
 	@ManyToMany
-	@JoinTable(name="renovacao_estudante", joinColumns=@JoinColumn(name="curso_id"), inverseJoinColumns=@JoinColumn(name="estudante"))
+//	@JoinTable(name="renovacao_estudante", joinColumns=@JoinColumn(name="curso_id"), inverseJoinColumns=@JoinColumn(name="estudante"))
 	private List<Estudante>estudantes2;
 	
 
@@ -53,14 +51,13 @@ public class Curso {
 		this.cursoCodigo = cursoCodigo;
 	}
 	
-	@ManyToMany(mappedBy="cursos")
+	@ManyToMany
 	private List <Departamento> departamentos;
 	
-	@ManyToMany(mappedBy="cursos")
+	@ManyToMany
 	private List<Disciplina> disciplinas;
 	@Column(name = "nome_curso")
 	private String nomeCurso;
-	@Column(name = "curso_codigo")
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long cursoCodigo;
@@ -85,23 +82,14 @@ public class Curso {
 		this.cursoCodigo = cursoCodigo;
 	}
 
-	@OneToMany(mappedBy="curso")
+	@OneToMany
 	private List<Estudante> estudantes = new ArrayList<>();
-//	public String getNome_departamento() {   isto e um metodo recursivo chame a se mesmo e cria problema na pesquisa
-//		return getNome_departamento();
-//	}
+
 	public List<Estudante> getEstudantes() {
 		return estudantes;
 	}
 	public void setEstudantes(List<Estudante> estudantes) {
 		this.estudantes = estudantes;
-	}
-	public Curso(  String nome_curso, Long curso_codigo) {
-	
-	
-		this.nomeCurso = nome_curso;
-		this.cursoCodigo = cursoCodigo;
-		// this.cursos = cursos;
 	}
 
 	public Curso(String nomeCurso) {

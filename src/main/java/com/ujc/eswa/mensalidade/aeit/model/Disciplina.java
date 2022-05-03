@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
-@Table(name="Disciplina")
 public class Disciplina {
 	@Column(name="id_disciplina")
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,7 +15,7 @@ public class Disciplina {
 	private int discCredito;
 	@Column(name="estatuto")
 	private String estatuto;
-	@ManyToMany(mappedBy="disciplinas")
+	@ManyToMany
 	private List <Estudante> estudantes;
 	
 	public List<Estudante> getEstudantes() {
@@ -33,7 +32,7 @@ public class Disciplina {
 		this.estudantes = estudantes;
 	}
 	@ManyToMany
-	@JoinTable(name="disciplina_curso", joinColumns=@JoinColumn(name="disciplina_id"), inverseJoinColumns=@JoinColumn(name="curso_id"))
+//	@JoinTable(name="disciplina_curso", joinColumns=@JoinColumn(name="disciplina_id"), inverseJoinColumns=@JoinColumn(name="curso_id"))
 	private List <Curso> cursos;
 	public Long getIdDisciplina() {
 		return idDisciplina;
