@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ujc.eswa.mensalidade.aeit.dto.SignupRequestDTO;
 import com.ujc.eswa.mensalidade.aeit.exception.ResourceNotFoundException;
 import com.ujc.eswa.mensalidade.aeit.model.Curso;
 import com.ujc.eswa.mensalidade.aeit.model.Estudante;
@@ -26,6 +27,7 @@ import com.ujc.eswa.mensalidade.aeit.repository.EstudanteRepository;
 import com.ujc.eswa.mensalidade.aeit.repository.FuncionarioRepository;
 import com.ujc.eswa.mensalidade.aeit.repository.PerfilUtilizadorRepository;
 import com.ujc.eswa.mensalidade.aeit.repository.UtilizadorRepository;
+import com.ujc.eswa.mensalidade.aeit.service.UtilizadorService;
 
 @RestController
 @RequestMapping(value = "ujc-mensalidade/api/v1/utilizadores")
@@ -42,7 +44,9 @@ public class UtilizadorController {
 
 	@Autowired
 	private PerfilUtilizadorRepository perfilUtilizadorRepository;
-
+	
+	@Autowired
+	private UtilizadorService utilizadorService;
 	@GetMapping
 	public ResponseEntity<List<Utilizador>> getAllUsers() {
 //		 userRepository.findAll();
@@ -76,10 +80,19 @@ public class UtilizadorController {
 //		return ResponseEntity.notFound().build();
 	}
 
+//	@PostMapping
+//	public Utilizador sigin(@RequestBody Utilizador utilizador) {
+//		System.out.println("To create current user: " + utilizador.getUserName());
+//		utilizador.setSenha(utilizadorService.passEncoder(utilizador.getSenha()));
+//		utilizador.setTextPassword(utilizador.getSenha());
+//		return utilizadorRepository.save(utilizador);
+//	}
+	
 	@PostMapping
-	public Utilizador sigin(@RequestBody Utilizador utilizador) {
-		System.out.println("To create current user: " + utilizador.getUserName());
-		return utilizadorRepository.save(utilizador);
+	public ResponseEntity<?> signup(@RequestBody SignupRequestDTO requestDTO) throws Exception {
+		Utilizador user = utilizadorService.registerUser(requestDTO);
+		return ResponseEntity.ok().body(user.getConfirmationToken()); // TODO: review return type. Consider returning
+																		// the URI
 	}
 
 	@PostMapping("/{id}")
