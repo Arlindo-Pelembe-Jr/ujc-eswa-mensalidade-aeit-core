@@ -33,7 +33,7 @@ public class AuthorizationFilter extends OncePerRequestFilter{
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		if (request.getServletPath().equals("/ujc-mensalidade/api/v1/auth/login") || request.getServletPath().equals("/ujc-mensalidade/api/v1/auth/signup")) {
+		if (request.getServletPath().equals("/api/v1/auth/login") || request.getServletPath().equals("/api/v1/auth/signup")) {
 			filterChain.doFilter(request, response);
 		} else {
 			String authorizationHeader = request.getHeader(AUTHORIZATION);
@@ -47,7 +47,7 @@ public class AuthorizationFilter extends OncePerRequestFilter{
 
 					String username = decodedJWT.getSubject();
 
-					String[] roles = decodedJWT.getClaim("roles").asArray(String.class);
+					String[] roles = decodedJWT.getClaim("perfilUtilizador").asArray(String.class);
 
 					Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
 

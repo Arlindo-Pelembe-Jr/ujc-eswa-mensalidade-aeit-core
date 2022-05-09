@@ -44,7 +44,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter{
 		// TODO Auto-generated method stub
 		
 		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-				request.getParameter("username"), request.getParameter("password"));
+				request.getParameter("username"), request.getParameter("senha"));
 		return authenticationManager.authenticate(authenticationToken);
 //		return super.attemptAuthentication(request, response);
 	}

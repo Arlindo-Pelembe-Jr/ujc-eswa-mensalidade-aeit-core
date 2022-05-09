@@ -88,7 +88,7 @@ public class UtilizadorController {
 //		return utilizadorRepository.save(utilizador);
 //	}
 	
-	@PostMapping
+	@PostMapping("/api/v1/auth/signup")
 	public ResponseEntity<?> signup(@RequestBody SignupRequestDTO requestDTO) throws Exception {
 		Utilizador user = utilizadorService.registerUser(requestDTO);
 		return ResponseEntity.ok().body(user.getConfirmationToken()); // TODO: review return type. Consider returning
