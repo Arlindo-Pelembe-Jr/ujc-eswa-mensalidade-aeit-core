@@ -13,6 +13,21 @@ public class Estudante extends BaseEntity {
 	 * 
 	 */
 	private static final long serialVersionUID = -8519710901493485449L;
+	
+	@Column(name="nacionalidade")
+	private String nacionalidade;
+	@Column(name="data_nascimento")
+	private Date data_nascimento;
+	@Column(name="tipo_documento")
+	private String tipo_documento;
+	@Column(name="nr_documento")
+	private Long nr_documento;
+	@Column(name="contacto")
+	private Long contacto;
+	@Column(name="data ingresso")
+	private Date data_ingresso;
+	@Column(name="provincia")
+	private String provincia;
 	@Column(name="data_ingresso")
 	private Date dataIgresso;
 	

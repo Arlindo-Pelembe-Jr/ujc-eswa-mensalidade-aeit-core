@@ -15,6 +15,8 @@ public class Disciplina {
 	private int discCredito;
 	@Column(name="estatuto")
 	private String estatuto;
+	@Column(name="ano")
+	private Long ano;
 	@ManyToMany
 	private List <Estudante> estudantes;
 	
