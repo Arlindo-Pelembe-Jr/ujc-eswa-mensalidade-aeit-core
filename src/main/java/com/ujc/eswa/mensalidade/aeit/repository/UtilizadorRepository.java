@@ -16,6 +16,9 @@ public interface UtilizadorRepository extends JpaRepository<Utilizador, Long>{
 	@Query(value="SELECT * FROM Utilizador WHERE user_name LIKE %:username% AND enabled LIKE %:enabled%", nativeQuery=true)
 	public Utilizador findByUsernameAndEnabledUtilizador(String username, boolean enabled);
 	
+	@Query(value="SELECT * FROM Utilizador WHERE email LIKE %:email% AND enabled=1", nativeQuery=true)
+	public Utilizador findByEmailAndEnabledUtilizador(String email);
+	
 	public Boolean existsByEmail(String email);
 	
 	@Query(value="SELECT * FROM Utilizador WHERE nome = nome AND senha = senha", nativeQuery=true)

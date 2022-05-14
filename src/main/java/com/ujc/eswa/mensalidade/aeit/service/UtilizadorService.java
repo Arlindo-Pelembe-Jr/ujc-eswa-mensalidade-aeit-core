@@ -39,7 +39,7 @@ public class UtilizadorService implements UserDetailsService{
 		this.passwordEncoder = passwordEncoder;
 	}
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
 		String uptimeStr = env.getProperty("system.uptime");
 
@@ -54,7 +54,7 @@ public class UtilizadorService implements UserDetailsService{
 			finalDate.setHours(Integer.parseInt(uptime[1].split(":")[0]));
 			finalDate.setMinutes(Integer.parseInt(uptime[1].split(":")[1]));
 
-			Utilizador user = userRepository.findByUsernameAndEnabledUtilizador(username, true);
+			Utilizador user = userRepository.findByEmailAndEnabledUtilizador(email);
 
 //			if (user != null && user.get != null) {
 //				Date currentDate = Calendar.getInstance().getTime();
@@ -66,7 +66,9 @@ public class UtilizadorService implements UserDetailsService{
 //			}
 //		}
 		}
-		return this.userRepository.findByUsernameAndEnabledUtilizador(username, true);
+		Utilizador userUtilizador = this.userRepository.findByEmailAndEnabledUtilizador(email);
+		System.out.println(userUtilizador);
+		return userUtilizador;
 	
 	}
 	
@@ -79,6 +81,8 @@ public class UtilizadorService implements UserDetailsService{
 		Utilizador user = new Utilizador();
 		user.setNome(request.getNome());
 		user.setSenha(passwordEncoder.encode(request.getSenha()));
+		user.setUserName(request.getNome());
+		user.setEmail(request.getEmail());
 		user.setEnabled(true);
 		user.setAccountNonExpired(true);
 		user.setAccountNonLocked(true);

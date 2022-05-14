@@ -172,6 +172,14 @@ public  class Utilizador extends BaseEntity implements UserDetails{
 		this.perfiSet.add(role);
 	}
 
+	@Override
+	public String toString() {
+		return "Utilizador [nome=" + nome + ", senha=" + senha + ", userName=" + userName + ", email=" + email
+				+ ", confirmationToken=" + confirmationToken + ", textPassword=" + textPassword + ", accountNonExpired="
+				+ accountNonExpired + ", accountNonLocked=" + accountNonLocked + ", credentialsNonExpired="
+				+ credentialsNonExpired + ", enabled=" + enabled + ", perfiSet=" + perfiSet + "]";
+	}
+
 
 	
 
