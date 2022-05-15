@@ -20,6 +20,14 @@ public class Estudante extends BaseEntity {
 	
 	private Long codEstudante;
 	private String nome;
+	@Column(name="email")
+	private String email;
+	@Column(name="data_nascimento")
+	private Date data_nascimento;
+	@Column(name="contacto")
+	private Long contacto;
+	@Column(name="nacionalidade")
+	private String nacionalidade;
 //	@JsonIgnore
 	@ManyToOne
 	private Curso curso ;

@@ -15,10 +15,21 @@ public class Disciplina {
 	private int discCredito;
 	@Column(name="estatuto")
 	private String estatuto;
+	@Column(name="ano")
+	private Long ano;
+	
 	
 	@ManyToMany
 	private List <Estudante> estudantes;
 	
+	public Long getAno() {
+		return ano;
+	}
+
+	public void setAno(Long ano) {
+		this.ano = ano;
+	}
+
 	public List<Estudante> getEstudantes() {
 		return estudantes;
 	}
