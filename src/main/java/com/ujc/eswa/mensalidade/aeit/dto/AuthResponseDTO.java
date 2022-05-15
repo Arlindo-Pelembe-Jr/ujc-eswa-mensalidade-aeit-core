@@ -14,7 +14,7 @@ public class AuthResponseDTO implements Serializable{
 	private String nome;
 	private String username;
 	private String token;
-	
+	private Long userId;
 	
 	
 	public AuthResponseDTO(String nome, String username, String token) {
@@ -23,6 +23,25 @@ public class AuthResponseDTO implements Serializable{
 		this.username = username;
 		this.token = token;
 	}
+	
+	public AuthResponseDTO(String nome, String username, String token, Long userId) {
+		super();
+		this.nome = nome;
+		this.username = username;
+		this.token = token;
+		this.userId = userId;
+	}
+
+	public Long getUserId() {
+		return userId;
+	}
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	private Set<PerfilUtilizador> perfilUtilizadors;
 	public String getNome() {
 		return nome;

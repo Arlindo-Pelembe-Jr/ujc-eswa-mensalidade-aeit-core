@@ -54,7 +54,6 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter{
 			Authentication authResult) throws IOException, ServletException {
 		// TODO Auto-generated method stub
 	Utilizador principal = (Utilizador)	authResult.getPrincipal();
-
 		String access_token = JWT.create().withSubject(principal.getUserName())
 				.withExpiresAt(new Date(System.currentTimeMillis() + 60 * 60 * 72 * 1000))
 				.withIssuer(request.getRequestURI().toString()).withClaim("perfilUtilizador", principal.getAuthorities().stream()
@@ -62,7 +61,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter{
 				.sign(JwtUtil.getAlgorithm());
 		
 		AuthResponseDTO authResponseDTO = new AuthResponseDTO(principal.getNome(), 
-				principal.getUsername(), access_token);
+				principal.getUsername(), access_token,principal.getId());
 		authResponseDTO.setPerfilUtilizadors(principal.getPerfiSet());
 
 		response.setContentType(APPLICATION_JSON_VALUE);

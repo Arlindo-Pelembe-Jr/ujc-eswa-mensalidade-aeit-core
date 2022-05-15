@@ -49,6 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.authorizeRequests().antMatchers("/api/v1/auth/**").permitAll();
 		http.authorizeRequests().antMatchers("/api/v1/settings/**").permitAll();
 		http.authorizeRequests().antMatchers("/api/v1/auth/signup/**").permitAll();
+		http.authorizeRequests().antMatchers("/ujc-mensalidade/api/v1/utilizadores/**").permitAll();
 		
 		http.authorizeRequests().anyRequest().authenticated();
 		http.addFilter(customAuthenticationFilter);

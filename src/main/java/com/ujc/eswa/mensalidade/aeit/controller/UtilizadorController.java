@@ -107,7 +107,7 @@ public class UtilizadorController {
 
 	@SuppressWarnings("unchecked")
 	@PostMapping("/role")
-	public ResponseEntity<Map<String, Object>> siginBasedRole(@RequestBody Map<String, Object> userRole) {
+	public ResponseEntity<Map<String, Object>> siginBasedRole(@RequestBody Map<String, Object> userRole) throws Exception  {
 		System.out.println("userRole RequestBody: " + userRole);
 		List<Map<String, Object>> dataResponse = new ArrayList<>();
 //		System.out.println("To create current user: "+utilizador.getUserName());
@@ -115,13 +115,26 @@ public class UtilizadorController {
 		
 		System.out.println("user: " + userMap);
 
-		Utilizador createdUser= new Utilizador();
+		SignupRequestDTO createdUser= new SignupRequestDTO();
 		createdUser.setNome(userMap.get("nome").toString());
 		createdUser.setSenha(userMap.get("senha").toString());
-		createdUser.setUserName(userMap.get("userName").toString());
 		createdUser.setEmail(userMap.get("email").toString());
-			createdUser=	utilizadorRepository.save(createdUser);
-			System.out.println("created User "+createdUser);
+		Map<String, Object> perfilUitliMap = (Map<String, Object>) userRole.get("perfilUtilizador");
+
+		System.out.println("perfilUtilizador: " + perfilUitliMap);
+		PerfilUtilizador perfilUtilizador = new PerfilUtilizador();
+		Perfil perfil = Perfil.valueOf(perfilUitliMap.get("perfil").toString());
+		perfilUtilizador.setPerfil(perfil);
+		createdUser.setPerfilUtilizador(perfilUtilizador);
+//		perfilUtilizador.setUtilizador(createdUser);
+//			createdUser=	utilizadorRepository.save(createdUser);
+	
+		
+			
+			System.out.println(createdUser);
+			Utilizador newUSer=new Utilizador();
+			newUSer=utilizadorService.registerUser( createdUser);
+			System.out.println("created User "+newUSer);
 
 		Map<String, Object> studentMap = (Map<String, Object>) userRole.get("estudante");
 		System.out.println("studentMap: " + studentMap);
@@ -136,19 +149,19 @@ public class UtilizadorController {
 		
 		createdStudent = estudanteRepository.save(createdStudent);
 		System.out.println("created student "+createdStudent);
-		Map<String, Object> perfilUitliMap = (Map<String, Object>) userRole.get("perfilUtilizador");
+//		Map<String, Object> perfilUitliMap = (Map<String, Object>) userRole.get("perfilUtilizador");
 
-		System.out.println("perfilUtilizador: " + perfilUitliMap);
-		PerfilUtilizador perfilUtilizador = new PerfilUtilizador();
-		Perfil perfil = Perfil.valueOf(perfilUitliMap.get("perfil").toString());
-		perfilUtilizador.setPerfil(perfil);
-		perfilUtilizador.setUtilizador(createdUser);
-		perfilUtilizador= perfilUtilizadorRepository.save(perfilUtilizador);
+//		System.out.println("perfilUtilizador: " + perfilUitliMap);
+//		PerfilUtilizador perfilUtilizador = new PerfilUtilizador();
+//		Perfil perfil = Perfil.valueOf(perfilUitliMap.get("perfil").toString());
+//		perfilUtilizador.setPerfil(perfil);
+//		perfilUtilizador.setUtilizador(createdUser);
+//		perfilUtilizador= perfilUtilizadorRepository.save(perfilUtilizador);
 		Map<String, Object> dataObjectMap = new HashMap<>();
 
-		dataObjectMap.put("utilizador", createdUser);
+		dataObjectMap.put("utilizador", newUSer);
 		dataObjectMap.put("estudante", createdStudent);
-		dataObjectMap.put("perfilUtilizador", perfilUtilizador);
+//		dataObjectMap.put("perfilUtilizador", perfilUtilizador);
 		dataResponse.add(dataObjectMap);
 
 //		return utilizadorRepository.save(utilizador);
