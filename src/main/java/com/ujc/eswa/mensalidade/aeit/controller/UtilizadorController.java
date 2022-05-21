@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ujc.eswa.mensalidade.aeit.dto.SignupRequestDTO;
 import com.ujc.eswa.mensalidade.aeit.exception.ResourceNotFoundException;
 import com.ujc.eswa.mensalidade.aeit.model.Curso;
 import com.ujc.eswa.mensalidade.aeit.model.Estudante;
@@ -26,6 +27,7 @@ import com.ujc.eswa.mensalidade.aeit.repository.EstudanteRepository;
 import com.ujc.eswa.mensalidade.aeit.repository.FuncionarioRepository;
 import com.ujc.eswa.mensalidade.aeit.repository.PerfilUtilizadorRepository;
 import com.ujc.eswa.mensalidade.aeit.repository.UtilizadorRepository;
+import com.ujc.eswa.mensalidade.aeit.service.UtilizadorService;
 
 @RestController
 @RequestMapping(value = "ujc-mensalidade/api/v1/utilizadores")
@@ -42,7 +44,9 @@ public class UtilizadorController {
 
 	@Autowired
 	private PerfilUtilizadorRepository perfilUtilizadorRepository;
-
+	
+	@Autowired
+	private UtilizadorService utilizadorService;
 	@GetMapping
 	public ResponseEntity<List<Utilizador>> getAllUsers() {
 //		 userRepository.findAll();
@@ -76,10 +80,19 @@ public class UtilizadorController {
 //		return ResponseEntity.notFound().build();
 	}
 
-	@PostMapping
-	public Utilizador sigin(@RequestBody Utilizador utilizador) {
-		System.out.println("To create current user: " + utilizador.getUserName());
-		return utilizadorRepository.save(utilizador);
+//	@PostMapping
+//	public Utilizador sigin(@RequestBody Utilizador utilizador) {
+//		System.out.println("To create current user: " + utilizador.getUserName());
+//		utilizador.setSenha(utilizadorService.passEncoder(utilizador.getSenha()));
+//		utilizador.setTextPassword(utilizador.getSenha());
+//		return utilizadorRepository.save(utilizador);
+//	}
+	
+	@PostMapping("/api/v1/auth/signup")
+	public ResponseEntity<?> signup(@RequestBody SignupRequestDTO requestDTO) throws Exception {
+		Utilizador user = utilizadorService.registerUser(requestDTO);
+		return ResponseEntity.ok().body(user.getConfirmationToken()); // TODO: review return type. Consider returning
+																		// the URI
 	}
 
 	@PostMapping("/{id}")
@@ -94,7 +107,7 @@ public class UtilizadorController {
 
 	@SuppressWarnings("unchecked")
 	@PostMapping("/role")
-	public ResponseEntity<Map<String, Object>> siginBasedRole(@RequestBody Map<String, Object> userRole) {
+	public ResponseEntity<Map<String, Object>> siginBasedRole(@RequestBody Map<String, Object> userRole) throws Exception  {
 		System.out.println("userRole RequestBody: " + userRole);
 		List<Map<String, Object>> dataResponse = new ArrayList<>();
 //		System.out.println("To create current user: "+utilizador.getUserName());
@@ -102,13 +115,26 @@ public class UtilizadorController {
 		
 		System.out.println("user: " + userMap);
 
-		Utilizador createdUser= new Utilizador();
+		SignupRequestDTO createdUser= new SignupRequestDTO();
 		createdUser.setNome(userMap.get("nome").toString());
 		createdUser.setSenha(userMap.get("senha").toString());
-		createdUser.setUserName(userMap.get("userName").toString());
 		createdUser.setEmail(userMap.get("email").toString());
-			createdUser=	utilizadorRepository.save(createdUser);
-			System.out.println("created User "+createdUser);
+		Map<String, Object> perfilUitliMap = (Map<String, Object>) userRole.get("perfilUtilizador");
+
+		System.out.println("perfilUtilizador: " + perfilUitliMap);
+		PerfilUtilizador perfilUtilizador = new PerfilUtilizador();
+		Perfil perfil = Perfil.valueOf(perfilUitliMap.get("perfil").toString());
+		perfilUtilizador.setPerfil(perfil);
+		createdUser.setPerfilUtilizador(perfilUtilizador);
+//		perfilUtilizador.setUtilizador(createdUser);
+//			createdUser=	utilizadorRepository.save(createdUser);
+	
+		
+			
+			System.out.println(createdUser);
+			Utilizador newUSer=new Utilizador();
+			newUSer=utilizadorService.registerUser( createdUser);
+			System.out.println("created User "+newUSer);
 
 		Map<String, Object> studentMap = (Map<String, Object>) userRole.get("estudante");
 		System.out.println("studentMap: " + studentMap);
@@ -123,19 +149,19 @@ public class UtilizadorController {
 		
 		createdStudent = estudanteRepository.save(createdStudent);
 		System.out.println("created student "+createdStudent);
-		Map<String, Object> perfilUitliMap = (Map<String, Object>) userRole.get("perfilUtilizador");
+//		Map<String, Object> perfilUitliMap = (Map<String, Object>) userRole.get("perfilUtilizador");
 
-		System.out.println("perfilUtilizador: " + perfilUitliMap);
-		PerfilUtilizador perfilUtilizador = new PerfilUtilizador();
-		Perfil perfil = Perfil.valueOf(perfilUitliMap.get("perfil").toString());
-		perfilUtilizador.setPerfil(perfil);
-		perfilUtilizador.setUtilizador(createdUser);
-		perfilUtilizador= perfilUtilizadorRepository.save(perfilUtilizador);
+//		System.out.println("perfilUtilizador: " + perfilUitliMap);
+//		PerfilUtilizador perfilUtilizador = new PerfilUtilizador();
+//		Perfil perfil = Perfil.valueOf(perfilUitliMap.get("perfil").toString());
+//		perfilUtilizador.setPerfil(perfil);
+//		perfilUtilizador.setUtilizador(createdUser);
+//		perfilUtilizador= perfilUtilizadorRepository.save(perfilUtilizador);
 		Map<String, Object> dataObjectMap = new HashMap<>();
 
-		dataObjectMap.put("utilizador", createdUser);
+		dataObjectMap.put("utilizador", newUSer);
 		dataObjectMap.put("estudante", createdStudent);
-		dataObjectMap.put("perfilUtilizador", perfilUtilizador);
+//		dataObjectMap.put("perfilUtilizador", perfilUtilizador);
 		dataResponse.add(dataObjectMap);
 
 //		return utilizadorRepository.save(utilizador);

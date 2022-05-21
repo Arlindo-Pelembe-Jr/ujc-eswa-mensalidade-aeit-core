@@ -32,8 +32,24 @@ public class Estudante extends BaseEntity {
 	@ManyToOne
 	private Curso curso ;
 	
+	@ManyToOne
+	private Utilizador utilizador;
+	
 	@ManyToMany
 	private List<Mensalidade> mensalidades;
+
+	
+	public Utilizador getUtilizador() {
+		return utilizador;
+	}
+
+	public void setUtilizador(Utilizador utilizador) {
+		this.utilizador = utilizador;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 
 	public List<Mensalidade> getMensalidades() {
 		return mensalidades;
