@@ -1,6 +1,12 @@
 package com.ujc.eswa.mensalidade.aeit.controller;
 
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,12 +18,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lowagie.text.DocumentException;
 import com.ujc.eswa.mensalidade.aeit.model.Estudante;
 import com.ujc.eswa.mensalidade.aeit.model.Mensalidade;
 import com.ujc.eswa.mensalidade.aeit.model.Pagamento;
 import com.ujc.eswa.mensalidade.aeit.repository.EstudanteRepository;
 import com.ujc.eswa.mensalidade.aeit.repository.MensalidadeRepository;
 import com.ujc.eswa.mensalidade.aeit.repository.PagamentoRepository;
+import com.ujc.eswa.mensalidade.aeit.service.PDFGeneratorPayments;
 
 @RestController
 @RequestMapping(value="ujc-mensalidade/api/v1/pagamentos")
@@ -37,6 +45,22 @@ public class PagamentoController {
 		return ResponseEntity.ok().body(listPaymentsList);
 	}
 	
+	@GetMapping("/report")
+	public void  generatePdf(HttpServletResponse response)throws DocumentException,IOException{
+		
+		response.setContentType("application/pdf");
+		DateFormat dateFormat = new SimpleDateFormat("YYY-MM-DD:HH:MM:SS");
+		String currentDateTime = dateFormat.format(new Date());
+		String headerkey = "Content-Disposition";
+		String headervalue = "attachment; filename=pdf_" + currentDateTime + ".pdf";
+		response.setHeader(headerkey, headervalue);
+		List<Pagamento> listPaymentsList=pagamentoRepository.findAll();
+		
+		PDFGeneratorPayments generatorPdf = new PDFGeneratorPayments();
+		generatorPdf.setPaymentsList(listPaymentsList);
+		generatorPdf.generate(response);
+//		return ResponseEntity.ok().body(listPaymentsList);
+	}
 //	@PostMapping
 //	public Pagamento createPayment(@RequestBody Pagamento pagamento) {
 //		System.out.println("To create payment");
