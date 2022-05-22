@@ -322,7 +322,7 @@ CREATE TABLE `estudante` (
   CONSTRAINT `FK306vnhgvwixmjl7s5s8cv7of5` FOREIGN KEY (`utilizador_id`) REFERENCES `utilizador` (`id`),
   CONSTRAINT `FK4tjkvtiibbnq9kw0332jgyvh0` FOREIGN KEY (`ui_utilizador_id`) REFERENCES `utilizador` (`id`),
   CONSTRAINT `FK8opmoiunfraj39xxk33lnm5v6` FOREIGN KEY (`curso_curso_codigo`) REFERENCES `curso` (`curso_codigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -331,7 +331,7 @@ CREATE TABLE `estudante` (
 
 LOCK TABLES `estudante` WRITE;
 /*!40000 ALTER TABLE `estudante` DISABLE KEYS */;
-INSERT INTO `estudante` VALUES (1,NULL,NULL,100,NULL,'Edwina',1,NULL,1,NULL,NULL,NULL,NULL),(2,NULL,NULL,101,NULL,'Teofilo',1,NULL,NULL,NULL,NULL,NULL,NULL),(3,NULL,NULL,102,NULL,'Israel',1,NULL,NULL,NULL,NULL,NULL,NULL),(4,NULL,NULL,103,NULL,'Jose Antonio',2,NULL,NULL,NULL,NULL,NULL,NULL),(5,NULL,NULL,104,NULL,'Pedro Salvador',3,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `estudante` VALUES (1,NULL,NULL,100,NULL,'Edwina',1,NULL,1,NULL,NULL,NULL,NULL),(2,NULL,NULL,101,NULL,'Teofilo',1,NULL,3,NULL,NULL,NULL,NULL),(3,NULL,NULL,102,NULL,'Israel',1,NULL,4,NULL,NULL,NULL,NULL),(4,NULL,NULL,103,NULL,'Jose Antonio',2,NULL,5,NULL,NULL,NULL,NULL),(5,NULL,NULL,104,NULL,'Pedro Salvador',3,NULL,NULL,NULL,NULL,NULL,NULL),(6,NULL,NULL,105,NULL,'Claudia',2,NULL,6,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `estudante` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -465,7 +465,7 @@ CREATE TABLE `mensalidade` (
   PRIMARY KEY (`id`),
   KEY `FKmbpl7vpw6p89y0xbtbo53wbr5` (`pagamento_id`),
   CONSTRAINT `FKmbpl7vpw6p89y0xbtbo53wbr5` FOREIGN KEY (`pagamento_id`) REFERENCES `pagamento` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -474,7 +474,7 @@ CREATE TABLE `mensalidade` (
 
 LOCK TABLES `mensalidade` WRITE;
 /*!40000 ALTER TABLE `mensalidade` DISABLE KEYS */;
-INSERT INTO `mensalidade` VALUES (1,NULL,NULL,NULL,100,1);
+INSERT INTO `mensalidade` VALUES (1,NULL,NULL,NULL,100,1),(2,NULL,NULL,NULL,3500,2),(3,NULL,NULL,NULL,4500,3),(4,NULL,NULL,NULL,1500,4),(5,NULL,NULL,NULL,4500,5);
 /*!40000 ALTER TABLE `mensalidade` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -495,7 +495,7 @@ CREATE TABLE `pagamento` (
   PRIMARY KEY (`id`),
   KEY `FKnkuhw89co1r62eht0n0n0gl98` (`estudante_id`),
   CONSTRAINT `FKnkuhw89co1r62eht0n0n0gl98` FOREIGN KEY (`estudante_id`) REFERENCES `estudante` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -504,7 +504,7 @@ CREATE TABLE `pagamento` (
 
 LOCK TABLES `pagamento` WRITE;
 /*!40000 ALTER TABLE `pagamento` DISABLE KEYS */;
-INSERT INTO `pagamento` VALUES (1,NULL,NULL,'5/15/2022',0,1);
+INSERT INTO `pagamento` VALUES (1,NULL,NULL,'5/15/2022',0,1),(2,NULL,NULL,'5/21/2022',1,1),(3,NULL,NULL,'5/21/2022',1,1),(4,NULL,NULL,'5/22/2022',0,6),(5,NULL,NULL,'5/22/2022',0,6);
 /*!40000 ALTER TABLE `pagamento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -553,7 +553,7 @@ CREATE TABLE `perfil_utilizador` (
   PRIMARY KEY (`id`),
   KEY `FK5akcucrqvjm78ub36v49ule7h` (`utilizador_id`),
   CONSTRAINT `FK5akcucrqvjm78ub36v49ule7h` FOREIGN KEY (`utilizador_id`) REFERENCES `utilizador` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -562,7 +562,7 @@ CREATE TABLE `perfil_utilizador` (
 
 LOCK TABLES `perfil_utilizador` WRITE;
 /*!40000 ALTER TABLE `perfil_utilizador` DISABLE KEYS */;
-INSERT INTO `perfil_utilizador` VALUES (1,NULL,NULL,'ADMIN',1),(3,NULL,NULL,'ADMIN',3),(4,NULL,NULL,'ESTUDANTE',4),(5,NULL,NULL,'ESTUDANTE',5);
+INSERT INTO `perfil_utilizador` VALUES (1,NULL,NULL,'ADMIN',1),(3,NULL,NULL,'ADMIN',3),(4,NULL,NULL,'ESTUDANTE',4),(5,NULL,NULL,'ESTUDANTE',5),(6,NULL,NULL,'ESTUDANTE',6);
 /*!40000 ALTER TABLE `perfil_utilizador` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -641,7 +641,7 @@ CREATE TABLE `utilizador` (
   `text_password` varchar(255) DEFAULT NULL,
   `user_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -650,7 +650,7 @@ CREATE TABLE `utilizador` (
 
 LOCK TABLES `utilizador` WRITE;
 /*!40000 ALTER TABLE `utilizador` DISABLE KEYS */;
-INSERT INTO `utilizador` VALUES (1,NULL,NULL,_binary '',_binary '','1ca6ebfa-c706-4d6b-a061-09290d7c8289',_binary '','admin@coder.com',_binary '','admin','$2a$10$GYH9LUInZew446DNGhitV.feqesw6chhQg8wTAKGfpI.IqeVPG1xG','admin','admin'),(3,NULL,NULL,_binary '',_binary '','56b0a66f-43ff-4469-b805-28e68c37cae9',_binary '','apj@coder.com',_binary '','apj','$2a$10$StvSpp.lgQg/9iTDhFj9tOCMTPe/4HRpgbJpSRF.0rXDV8lPDgxwK','apj123','apj'),(4,NULL,NULL,_binary '',_binary '','a2c11730-dfff-4cdf-accc-594d42bc1ccf',_binary '','jose@coder.com',_binary '','Jose Antonio','$2a$10$0ar.lnxe8dnXjg4lCNWOzOI78WB5yfjhBVbwkwr43S2HRYlUgxn7e','jose123','Jose Antonio'),(5,NULL,NULL,_binary '',_binary '','990e6098-54a3-44ab-959d-4643a632c9be',_binary '','pedro@coder.com',_binary '','Pedro Salvador','$2a$10$h3qn1z1a83M/bOQJ6wHY8OVEEsPsu0HYe4l6h6cfPg9T0uAkWip2q','pedro123','Pedro Salvador');
+INSERT INTO `utilizador` VALUES (1,NULL,NULL,_binary '',_binary '','1ca6ebfa-c706-4d6b-a061-09290d7c8289',_binary '','admin@coder.com',_binary '','admin','$2a$10$GYH9LUInZew446DNGhitV.feqesw6chhQg8wTAKGfpI.IqeVPG1xG','admin','admin'),(3,NULL,NULL,_binary '',_binary '','56b0a66f-43ff-4469-b805-28e68c37cae9',_binary '','apj@coder.com',_binary '','apj','$2a$10$StvSpp.lgQg/9iTDhFj9tOCMTPe/4HRpgbJpSRF.0rXDV8lPDgxwK','apj123','apj'),(4,NULL,NULL,_binary '',_binary '','a2c11730-dfff-4cdf-accc-594d42bc1ccf',_binary '','jose@coder.com',_binary '','Jose Antonio','$2a$10$0ar.lnxe8dnXjg4lCNWOzOI78WB5yfjhBVbwkwr43S2HRYlUgxn7e','jose123','Jose Antonio'),(5,NULL,NULL,_binary '',_binary '','990e6098-54a3-44ab-959d-4643a632c9be',_binary '','pedro@coder.com',_binary '','Pedro Salvador','$2a$10$h3qn1z1a83M/bOQJ6wHY8OVEEsPsu0HYe4l6h6cfPg9T0uAkWip2q','pedro123','Pedro Salvador'),(6,NULL,NULL,_binary '',_binary '','9527df1c-56da-4cd4-bc7d-2e21a94fb022',_binary '','claudia@coder.com',_binary '','Claudia','$2a$10$ESfbDnn7s28kVpFh9sYHde01ZFgn1hYyUpOzCrF3tAPa2j7NAL2O6','claudia123','Claudia');
 /*!40000 ALTER TABLE `utilizador` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -663,4 +663,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-21 15:33:47
+-- Dump completed on 2022-05-22 18:33:43

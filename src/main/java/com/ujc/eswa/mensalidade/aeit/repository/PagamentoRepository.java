@@ -10,5 +10,5 @@ public interface PagamentoRepository extends JpaRepository<Pagamento, Long>{
 	
 	public List<Pagamento> findAll();
 	 
-	public List<Pagamento> findAllByEstudanteId(Long estudanteId);
+	public List<Pagamento> findByEstudanteId(Long estudanteId);
 }

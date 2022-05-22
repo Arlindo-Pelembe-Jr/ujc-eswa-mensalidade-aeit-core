@@ -146,7 +146,7 @@ public class UtilizadorController {
 		Map<String, Object> cursoMap = (Map<String, Object>) studentMap.get("curso");
 
 		createdStudent.setCurso(new Curso(Long.parseLong(cursoMap.get("cursoCodigo").toString()) ) );
-		
+		createdStudent.setUtilizador(newUSer);
 		createdStudent = estudanteRepository.save(createdStudent);
 		System.out.println("created student "+createdStudent);
 //		Map<String, Object> perfilUitliMap = (Map<String, Object>) userRole.get("perfilUtilizador");
