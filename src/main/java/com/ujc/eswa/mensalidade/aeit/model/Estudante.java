@@ -15,18 +15,13 @@ public class Estudante extends BaseEntity {
 	private static final long serialVersionUID = -8519710901493485449L;
 	
 
-	@Column(name="data_ingresso")
-	private Date dataIgresso;
+	private String dataIgresso;
 	
 	private Long codEstudante;
 	private String nome;
-	@Column(name="email")
 	private String email;
-	@Column(name="data_nascimento")
-	private Date data_nascimento;
-	@Column(name="contacto")
+	private String dataNascimento;
 	private Long contacto;
-	@Column(name="nacionalidade")
 	private String nacionalidade;
 //	@JsonIgnore
 	@ManyToOne
@@ -86,11 +81,11 @@ public class Estudante extends BaseEntity {
 		this.disciplinas = disciplinas;
 	}
 
-	public Date getDataIgresso() {
+	public String getDataIgresso() {
 		return dataIgresso;
 	}
 
-	public void setDataIgresso(Date dataIgresso) {
+	public void setDataIgresso(String dataIgresso) {
 		this.dataIgresso = dataIgresso;
 	}
 
@@ -102,14 +97,46 @@ public class Estudante extends BaseEntity {
 		this.codEstudante = codEstudante;
 	}
 
+	
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getData_nascimento() {
+		return dataNascimento;
+	}
+
+	public void setData_nascimento(String data_nascimento) {
+		this.dataNascimento = data_nascimento;
+	}
+
+	public Long getContacto() {
+		return contacto;
+	}
+
+	public void setContacto(Long contacto) {
+		this.contacto = contacto;
+	}
+
+	public String getNacionalidade() {
+		return nacionalidade;
+	}
+
+	public void setNacionalidade(String nacionalidade) {
+		this.nacionalidade = nacionalidade;
+	}
 
 	public Estudante() {
 		super();
 	}
 
-	public Estudante(Long id, String nome, String apelido, Date data_nascimento, double contacto, Sexo sexo,
-			String nacionalidade, Date data_ingresso, Long cod_estudante, Curso curso) {
+	public Estudante(Long id, String nome, String apelido, String data_nascimento, double contacto, Sexo sexo,
+			String nacionalidade, String data_ingresso, Long cod_estudante, Curso curso) {
 		this.dataIgresso = data_ingresso;
 		this.codEstudante = cod_estudante;
 		this.curso = curso;
@@ -131,12 +158,12 @@ public class Estudante extends BaseEntity {
 		this.codEstudante = cod_estudante;
 	}
 
-	public Date getData_ingresso() {
+	public String getData_ingresso() {
 		return dataIgresso;
 	}
 
 
-	public void setData_ingresso(Date data_ingresso) {
+	public void setData_ingresso(String data_ingresso) {
 		this.dataIgresso = data_ingresso;
 	}
 

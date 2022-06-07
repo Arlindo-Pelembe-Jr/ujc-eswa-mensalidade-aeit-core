@@ -3,9 +3,6 @@ package com.ujc.eswa.mensalidade.aeit.model;
 import java.sql.Date;
 
 import javax.persistence.*;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 @Entity
 @Table(name="funcionario")
 public class Funcionario extends BaseEntity {
@@ -14,7 +11,92 @@ public class Funcionario extends BaseEntity {
 	@JoinColumn(name="cargo_id_fk")
 	private Cargo Cargo;
 	
+	private Long codEstudante;
+	private String nome;
+	private String email;
+	private String dataNascimento;
+	private Long contacto;
+	private String nacionalidade;
 	
+	@ManyToOne
+	private Utilizador utilizador;
+	
+	
+	public Long getCodEstudante() {
+		return codEstudante;
+	}
+
+
+	public void setCodEstudante(Long codEstudante) {
+		this.codEstudante = codEstudante;
+	}
+
+
+	public String getNome() {
+		return nome;
+	}
+
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+	public String getDataNascimento() {
+		return dataNascimento;
+	}
+
+
+	public void setDataNascimento(String dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
+
+
+	public Long getContacto() {
+		return contacto;
+	}
+
+
+	public void setContacto(Long contacto) {
+		this.contacto = contacto;
+	}
+
+
+	public String getNacionalidade() {
+		return nacionalidade;
+	}
+
+
+	public void setNacionalidade(String nacionalidade) {
+		this.nacionalidade = nacionalidade;
+	}
+
+
+	public Utilizador getUtilizador() {
+		return utilizador;
+	}
+
+
+	public void setUtilizador(Utilizador utilizador) {
+		this.utilizador = utilizador;
+	}
+
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+
 	public Funcionario() {
 		super();
 	}

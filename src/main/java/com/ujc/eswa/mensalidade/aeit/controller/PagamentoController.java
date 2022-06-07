@@ -63,7 +63,23 @@ public class PagamentoController {
 		generatorPdf.generate(response);
 //		return ResponseEntity.ok().body(listPaymentsList);
 	}
-	
+	@GetMapping("/report")
+	public void  generatePdf(HttpServletResponse response)throws DocumentException,IOException{
+		
+		response.setContentType("application/pdf");
+		DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD:HH:MM:SS");
+		String currentDateTime = dateFormat.format(new Date());
+		String headerkey = "Content-Disposition";
+		String headervalue = "attachment; filename=pdf_" + currentDateTime + ".pdf";
+		response.setHeader(headerkey, headervalue);
+
+		List<Pagamento> listPaymentsList=pagamentoRepository.findAll();
+		
+		PDFGeneratorPayments generatorPdf = new PDFGeneratorPayments();
+		generatorPdf.setPaymentsList(listPaymentsList);
+		generatorPdf.generate(response);
+//		return ResponseEntity.ok().body(listPaymentsList);
+	}
 	@GetMapping("/mouthlyPayment/report/{utilizadorId}")
 	public ResponseEntity<List<Pagamento>>  paymentsMouthlyByStudent(@PathVariable Long utilizadorId){
 		Estudante estudante = estudanteRepository.findEstudanteByUtilizadorId(utilizadorId);

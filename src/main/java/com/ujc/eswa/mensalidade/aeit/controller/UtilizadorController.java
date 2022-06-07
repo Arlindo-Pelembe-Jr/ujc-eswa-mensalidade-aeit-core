@@ -20,6 +20,7 @@ import com.ujc.eswa.mensalidade.aeit.dto.SignupRequestDTO;
 import com.ujc.eswa.mensalidade.aeit.exception.ResourceNotFoundException;
 import com.ujc.eswa.mensalidade.aeit.model.Curso;
 import com.ujc.eswa.mensalidade.aeit.model.Estudante;
+import com.ujc.eswa.mensalidade.aeit.model.Funcionario;
 import com.ujc.eswa.mensalidade.aeit.model.Perfil;
 import com.ujc.eswa.mensalidade.aeit.model.PerfilUtilizador;
 import com.ujc.eswa.mensalidade.aeit.model.Utilizador;
@@ -108,6 +109,7 @@ public class UtilizadorController {
 	@SuppressWarnings("unchecked")
 	@PostMapping("/role")
 	public ResponseEntity<Map<String, Object>> siginBasedRole(@RequestBody Map<String, Object> userRole) throws Exception  {
+		
 		System.out.println("userRole RequestBody: " + userRole);
 		List<Map<String, Object>> dataResponse = new ArrayList<>();
 //		System.out.println("To create current user: "+utilizador.getUserName());
@@ -135,20 +137,47 @@ public class UtilizadorController {
 			Utilizador newUSer=new Utilizador();
 			newUSer=utilizadorService.registerUser( createdUser);
 			System.out.println("created User "+newUSer);
+			Estudante createdStudent=new Estudante();
+			Funcionario createdFuncionario = new Funcionario();
 
-		Map<String, Object> studentMap = (Map<String, Object>) userRole.get("estudante");
-		System.out.println("studentMap: " + studentMap);
-		
-		Estudante createdStudent=new Estudante();
-		
-		createdStudent.setNome(studentMap.get("nome").toString());
-		createdStudent.setCod_estudante(estudanteRepository.findMaxCodEstudante()+1);
-		Map<String, Object> cursoMap = (Map<String, Object>) studentMap.get("curso");
+				switch (perfilUitliMap.get("perfil").toString()) {
+				case "ADMIN":
+					
+					break;
+case "ESTUDANTE":
+	Map<String, Object> studentMap = (Map<String, Object>) userRole.get("estudante");
+	System.out.println("studentMap: " + studentMap);
+	
+	
+	createdStudent.setNome(studentMap.get("nome").toString());
+	createdStudent.setContacto(Long.parseLong(studentMap.get("contacto").toString()));
+	createdStudent.setData_nascimento(studentMap.get("dataNascimento").toString());
+	createdStudent.setData_ingresso(studentMap.get("dataIngresso").toString());
+	createdStudent.setNacionalidade(studentMap.get("nacionalidade").toString());
+	createdStudent.setEmail(studentMap.get("email").toString());
+	createdStudent.setCod_estudante(estudanteRepository.findMaxCodEstudante()+1);
+	Map<String, Object> cursoMap = (Map<String, Object>) studentMap.get("curso");
 
-		createdStudent.setCurso(new Curso(Long.parseLong(cursoMap.get("cursoCodigo").toString()) ) );
-		createdStudent.setUtilizador(newUSer);
-		createdStudent = estudanteRepository.save(createdStudent);
-		System.out.println("created student "+createdStudent);
+	createdStudent.setCurso(new Curso(Long.parseLong(cursoMap.get("cursoCodigo").toString()) ) );
+	createdStudent.setUtilizador(newUSer);
+	createdStudent = estudanteRepository.save(createdStudent);
+	System.out.println("created student "+createdStudent);
+					break;
+case "FUNCIONARIO":Map<String, Object> funcionarioMap = (Map<String, Object>) userRole.get("funcionario");
+System.out.println("studentMap: " + funcionarioMap);
+
+createdFuncionario.setNome(funcionarioMap.get("nome").toString());
+createdFuncionario.setContacto(Long.parseLong(funcionarioMap.get("contacto").toString()));
+createdFuncionario.setDataNascimento(funcionarioMap.get("dataNascimento").toString());
+createdFuncionario.setNacionalidade(funcionarioMap.get("nacionalidade").toString());
+createdFuncionario.setEmail(funcionarioMap.get("email").toString());
+createdFuncionario.setUtilizador(newUSer);
+createdFuncionario=funcionarioRepository.save(createdFuncionario);
+	break;
+				default:
+					break;
+				}
+	
 //		Map<String, Object> perfilUitliMap = (Map<String, Object>) userRole.get("perfilUtilizador");
 
 //		System.out.println("perfilUtilizador: " + perfilUitliMap);
@@ -161,6 +190,8 @@ public class UtilizadorController {
 
 		dataObjectMap.put("utilizador", newUSer);
 		dataObjectMap.put("estudante", createdStudent);
+		dataObjectMap.put("funcionario", createdFuncionario);
+
 //		dataObjectMap.put("perfilUtilizador", perfilUtilizador);
 		dataResponse.add(dataObjectMap);
 
