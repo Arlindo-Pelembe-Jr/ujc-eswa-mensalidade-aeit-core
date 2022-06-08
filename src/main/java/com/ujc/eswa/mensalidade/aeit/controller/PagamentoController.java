@@ -97,7 +97,7 @@ public class PagamentoController {
 	public Pagamento createPaymentWithMounthly(@PathVariable("amount") Long amount,@RequestBody Pagamento pagamento) {
 		System.out.println("To create payment with "+" amount: "+amount);
 		
-		Estudante estudante = estudanteRepository.findById(pagamento.getEstudante().getId()).orElseThrow(null);
+		Estudante estudante = estudanteRepository.findEstudanteByUtilizadorId(pagamento.getEstudante().getUtilizador().getId());
 		pagamento.setEstudante(estudante);
 		Pagamento payment= pagamentoRepository.save(pagamento);
 
