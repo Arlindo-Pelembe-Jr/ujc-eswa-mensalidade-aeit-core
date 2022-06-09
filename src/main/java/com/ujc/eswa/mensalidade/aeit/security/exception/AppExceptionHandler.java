@@ -2,7 +2,8 @@ package com.ujc.eswa.mensalidade.aeit.security.exception;
 
 import java.time.LocalDateTime;
 
-import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.apache.tomcat.util.ExceptionUtils;
+//import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

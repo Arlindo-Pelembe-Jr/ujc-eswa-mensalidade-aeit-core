@@ -52,16 +52,10 @@ import javax.persistence.*;
 		public void setFaltas(Long faltas) {
 			this.faltas = faltas;
 		}
-		public Long getMedia() {
-			return media;
-		}
-		public void setMedia(Long media) {
-			this.media = media;
-		}
+		
 		@Column(name="faltas")
 		private Long faltas;
-		@Column(name="media")
-		private Long media;
+		
 		
 	}
 
