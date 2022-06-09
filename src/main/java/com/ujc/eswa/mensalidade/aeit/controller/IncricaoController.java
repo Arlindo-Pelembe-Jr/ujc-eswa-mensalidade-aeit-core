@@ -24,7 +24,7 @@ public class IncricaoController {
 	public ResponseEntity<List<Inscricao>> getAll(){
 		List<Inscricao> inscricoesInscricaos = inscricaoRepository.findAll();
 		if(!inscricoesInscricaos.isEmpty()) {
-			ResponseEntity.ok().body(inscricoesInscricaos);
+			return ResponseEntity.ok().body(inscricoesInscricaos);
 		}
 		return ResponseEntity.notFound().build();
 	}

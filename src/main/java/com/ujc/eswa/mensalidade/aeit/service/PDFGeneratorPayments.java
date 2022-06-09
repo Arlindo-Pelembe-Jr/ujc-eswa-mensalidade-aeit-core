@@ -34,7 +34,7 @@ public class PDFGeneratorPayments {
 		fontTitle.setSize(20);
 		fontTitle.setColor(Color.BLUE);
 
-		Paragraph paragraph = new Paragraph("List Of Payments", fontTitle);
+		Paragraph paragraph = new Paragraph("Relatorio de Pagamentos", fontTitle);
 
 		paragraph.setAlignment(Paragraph.ALIGN_CENTER);
 

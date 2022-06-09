@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -86,6 +88,18 @@ public class PagamentoController {
 		
 		List<Pagamento> listPaymentsList=pagamentoRepository.findByEstudanteId(estudante.getId());
 //		List<Mensalidade> mouthlyPaymentsList=mensalidadeRepository.findAll();
+		return ResponseEntity.ok().body(listPaymentsList);
+	}
+	@GetMapping("/mouthlyPayment/report/detail/{utilizadorId}")
+	public ResponseEntity<List<Pagamento>>  paymentsMouthlyByStudentDetailed(@PathVariable Long utilizadorId){
+		Estudante estudante = estudanteRepository.findEstudanteByUtilizadorId(utilizadorId);
+//		Pagamento payment =pagamentoRepository.findA
+		List<Pagamento> listPaymentsList=pagamentoRepository.findByEstudanteId(estudante.getId());
+		listPaymentsList.forEach(payment->{
+			Map<String, Object> dataObjectMap = new HashMap<>();
+			mensalidadeRepository.findByPagamentoId(payment.getId());
+		});
+//		List<Mensalidade> mouthlyPaymentsList=mensalidadeRepository.findByPagamentoId(utilizadorId);
 		return ResponseEntity.ok().body(listPaymentsList);
 	}
 //	@PostMapping

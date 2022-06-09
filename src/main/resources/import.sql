@@ -35,6 +35,7 @@ CREATE TABLE `cargo` (
 
 LOCK TABLES `cargo` WRITE;
 /*!40000 ALTER TABLE `cargo` DISABLE KEYS */;
+INSERT INTO `cargo` VALUES (131,'docente'),(132,'director'),(133,'prof_assistente'),(134,'funcionario');
 /*!40000 ALTER TABLE `cargo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -49,7 +50,7 @@ CREATE TABLE `curso` (
   `curso_codigo` bigint NOT NULL AUTO_INCREMENT,
   `nome_curso` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`curso_codigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -76,7 +77,7 @@ CREATE TABLE `curso_departamentos` (
   KEY `FK3bdn0yh8rur2tuojaswwx8pbm` (`curso_curso_codigo`),
   CONSTRAINT `FK3bdn0yh8rur2tuojaswwx8pbm` FOREIGN KEY (`curso_curso_codigo`) REFERENCES `curso` (`curso_codigo`),
   CONSTRAINT `FKq6103wnkn65nltdfphugmihec` FOREIGN KEY (`departamentos_cod_departamento`) REFERENCES `departamento` (`cod_departamento`)
-) ;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -111,6 +112,7 @@ CREATE TABLE `curso_disciplinas` (
 
 LOCK TABLES `curso_disciplinas` WRITE;
 /*!40000 ALTER TABLE `curso_disciplinas` DISABLE KEYS */;
+INSERT INTO `curso_disciplinas` VALUES (1,801),(1,802),(1,803),(1,804),(1,805),(1,806),(1,807),(1,808),(1,809),(1,810);
 /*!40000 ALTER TABLE `curso_disciplinas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -186,7 +188,7 @@ CREATE TABLE `departamento` (
 
 LOCK TABLES `departamento` WRITE;
 /*!40000 ALTER TABLE `departamento` DISABLE KEYS */;
-INSERT INTO `departamento` VALUES (1,'FCT');
+INSERT INTO `departamento` VALUES (1,'FCT'),(2,'Faculdade de engenharia'),(3,'Faculdade de ciencias sociais'),(4,'Faculdade de contabilidade'),(5,'Faculdade de estudos Nauticos'),(6,'Faculdade de relacoes internacionais'),(7,'Faculdade de letras');
 /*!40000 ALTER TABLE `departamento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -239,6 +241,7 @@ CREATE TABLE `disciplina` (
 
 LOCK TABLES `disciplina` WRITE;
 /*!40000 ALTER TABLE `disciplina` DISABLE KEYS */;
+INSERT INTO `disciplina` VALUES (801,3,'introducao a informatica','nuclear',1),(802,4,'Fundamentos de informatica','nuclear',1),(803,4,'redes de computadores','nuclear',2),(804,4,'analise matematica I','complementar',1),(805,3,'gestao de empresas','complementar',1),(806,4,'Engenharia de software','nuclear',3),(807,4,'Sistemas distribuidos','nuclear',3),(808,4,'analise e desenho orientado a objectos','nuclear',3),(809,4,'Gestao de sistemas de informacao','nuclear',3),(810,4,'programacao web','nuclear',2);
 /*!40000 ALTER TABLE `disciplina` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -332,7 +335,7 @@ CREATE TABLE `estudante` (
 
 LOCK TABLES `estudante` WRITE;
 /*!40000 ALTER TABLE `estudante` DISABLE KEYS */;
-INSERT INTO `estudante` VALUES (1,NULL,NULL,100,NULL,'Edwina',1,NULL,1,NULL,NULL,NULL,NULL,NULL),(2,NULL,NULL,101,NULL,'Teofilo',1,NULL,3,NULL,NULL,NULL,NULL,NULL),(3,NULL,NULL,102,NULL,'Israel',1,NULL,4,NULL,NULL,NULL,NULL,NULL),(4,NULL,NULL,103,NULL,'Jose Antonio',2,NULL,5,NULL,NULL,NULL,NULL,NULL),(5,NULL,NULL,104,NULL,'Pedro Salvador',3,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(6,NULL,NULL,105,NULL,'Claudia',2,NULL,6,NULL,NULL,NULL,NULL,NULL),(7,NULL,NULL,106,NULL,'Meek Mill',3,NULL,7,NULL,NULL,NULL,NULL,NULL),(8,NULL,NULL,107,NULL,'John Due',3,NULL,9,821234567,'1997-11-27',NULL,'','6/7/2022'),(9,NULL,NULL,108,NULL,'Tiago',2,NULL,10,2558741471,'1989-11-16','tiago@coder.com','Estrangeira','6/7/2022');
+INSERT INTO `estudante` VALUES (1,NULL,NULL,100,NULL,'Edwina',1,NULL,1,NULL,NULL,NULL,NULL,NULL),(2,NULL,NULL,101,NULL,'Teofilo',1,NULL,3,NULL,NULL,NULL,NULL,NULL),(3,NULL,NULL,102,NULL,'Israel',1,NULL,4,NULL,NULL,NULL,NULL,NULL),(4,NULL,NULL,103,NULL,'Jose Antonio',2,NULL,5,NULL,NULL,NULL,NULL,NULL),(5,NULL,NULL,104,NULL,'Pedro Salvador',3,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(6,NULL,NULL,105,NULL,'Claudia',2,NULL,6,NULL,NULL,NULL,NULL,NULL),(7,NULL,NULL,106,NULL,'Meek Mill',3,NULL,7,NULL,NULL,NULL,NULL,NULL),(8,NULL,NULL,107,NULL,'John Due',3,NULL,9,821234567,'1997-11-27',NULL,'','6/7/2022'),(9,NULL,NULL,108,NULL,'Tiago',2,NULL,10,2558741471,'1989-11-16','tiago@coder.com','Estrangeira','6/7/2022'),(10,NULL,NULL,109,NULL,'Maria Isabel',2,NULL,13,821345628,'1990-02-03','mary@coder.com','Mocambicana','6/9/2022');
 /*!40000 ALTER TABLE `estudante` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -422,7 +425,7 @@ CREATE TABLE `funcionario` (
 
 LOCK TABLES `funcionario` WRITE;
 /*!40000 ALTER TABLE `funcionario` DISABLE KEYS */;
-INSERT INTO `funcionario` VALUES (2,NULL,NULL,NULL,NULL,NULL,844763195,'1994-10-27','mariza@coder.com','Mocambicana','Mariza Santos',12);
+INSERT INTO `funcionario` VALUES (2,NULL,NULL,NULL,NULL,NULL,844763195,'1994-10-27','mariza@coder.com','Mocambicana','Mariza Santos',12),(3,NULL,NULL,NULL,NULL,NULL,821234567,'1993-06-16','joao@coder.com','Mocambicana','Joao Pelembe',14);
 /*!40000 ALTER TABLE `funcionario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -437,7 +440,6 @@ CREATE TABLE `inscricao` (
   `cod_inscricao` bigint NOT NULL,
   `faltas` bigint DEFAULT NULL,
   `data_inscricao` date DEFAULT NULL,
-  `media` bigint DEFAULT NULL,
   `nota1` bigint DEFAULT NULL,
   `nota2` bigint DEFAULT NULL,
   `estudante_id` bigint NOT NULL,
@@ -456,6 +458,7 @@ CREATE TABLE `inscricao` (
 
 LOCK TABLES `inscricao` WRITE;
 /*!40000 ALTER TABLE `inscricao` DISABLE KEYS */;
+INSERT INTO `inscricao` VALUES (1,3,'2020-09-02',12,13,1,801),(2,2,'2019-03-02',11,15,3,805),(3,1,'2021-01-12',15,10,2,802),(4,2,'2019-10-12',12,14,4,803),(5,2,'2018-11-12',10,11,1,802);
 /*!40000 ALTER TABLE `inscricao` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -485,7 +488,7 @@ CREATE TABLE `mensalidade` (
 
 LOCK TABLES `mensalidade` WRITE;
 /*!40000 ALTER TABLE `mensalidade` DISABLE KEYS */;
-INSERT INTO `mensalidade` VALUES (1,NULL,NULL,NULL,100,1),(2,NULL,NULL,NULL,3500,2),(3,NULL,NULL,NULL,4500,3),(4,NULL,NULL,NULL,1500,4),(5,NULL,NULL,NULL,4500,5),(6,NULL,NULL,NULL,1500,6),(7,NULL,NULL,NULL,3500,7),(8,NULL,NULL,NULL,3500,8),(9,NULL,NULL,NULL,3500,9),(10,NULL,NULL,NULL,3500,10),(11,NULL,NULL,NULL,3500,11),(12,NULL,NULL,NULL,3500,12),(13,NULL,NULL,NULL,35000,13),(14,NULL,NULL,NULL,844763195,2),(15,NULL,NULL,NULL,3500,10),(16,NULL,NULL,NULL,3500,10);
+INSERT INTO `mensalidade` VALUES (1,NULL,NULL,NULL,100,1),(2,NULL,NULL,NULL,3500,2),(3,NULL,NULL,NULL,4500,3),(4,NULL,NULL,NULL,1500,4),(5,NULL,NULL,NULL,4500,5),(6,NULL,NULL,NULL,1500,6),(7,NULL,NULL,NULL,3500,7),(8,NULL,NULL,NULL,3500,8),(9,NULL,NULL,NULL,3500,9),(10,NULL,NULL,NULL,3500,10),(11,NULL,NULL,NULL,3500,11),(12,NULL,NULL,NULL,3500,12),(13,NULL,NULL,NULL,35000,13),(14,NULL,NULL,NULL,844763195,2),(15,NULL,NULL,NULL,3500,10),(16,NULL,NULL,NULL,3500,10),(17,NULL,NULL,NULL,3500,14);
 /*!40000 ALTER TABLE `mensalidade` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -515,7 +518,7 @@ CREATE TABLE `pagamento` (
 
 LOCK TABLES `pagamento` WRITE;
 /*!40000 ALTER TABLE `pagamento` DISABLE KEYS */;
-INSERT INTO `pagamento` VALUES (1,NULL,NULL,'5/15/2022',0,1),(2,NULL,NULL,'6/8/2022',0,1),(3,NULL,NULL,'5/21/2022',1,1),(4,NULL,NULL,'5/22/2022',0,6),(5,NULL,NULL,'5/22/2022',1,6),(6,NULL,NULL,'6/7/2022',0,1),(7,NULL,NULL,'6/7/2022',1,9),(8,NULL,NULL,'6/7/2022',0,9),(9,NULL,NULL,'6/8/2022',0,7),(10,NULL,NULL,'6/9/2022',1,7),(11,NULL,NULL,'6/8/2022',0,7),(12,NULL,NULL,'6/8/2022',0,1),(13,NULL,NULL,'6/8/2022',0,1);
+INSERT INTO `pagamento` VALUES (1,NULL,NULL,'5/15/2022',0,1),(2,NULL,NULL,'6/8/2022',0,1),(3,NULL,NULL,'5/21/2022',1,1),(4,NULL,NULL,'5/22/2022',0,6),(5,NULL,NULL,'5/22/2022',1,6),(6,NULL,NULL,'6/7/2022',0,1),(7,NULL,NULL,'6/7/2022',1,9),(8,NULL,NULL,'6/7/2022',0,9),(9,NULL,NULL,'6/8/2022',0,7),(10,NULL,NULL,'6/9/2022',1,7),(11,NULL,NULL,'6/8/2022',0,7),(12,NULL,NULL,'6/8/2022',0,1),(13,NULL,NULL,'6/8/2022',0,1),(14,NULL,NULL,'6/9/2022',0,10),(15,NULL,NULL,NULL,1,10),(16,NULL,NULL,NULL,1,10),(17,NULL,NULL,NULL,1,10),(18,NULL,NULL,NULL,1,10);
 /*!40000 ALTER TABLE `pagamento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -573,7 +576,7 @@ CREATE TABLE `perfil_utilizador` (
 
 LOCK TABLES `perfil_utilizador` WRITE;
 /*!40000 ALTER TABLE `perfil_utilizador` DISABLE KEYS */;
-INSERT INTO `perfil_utilizador` VALUES (1,NULL,NULL,'ADMIN',1),(3,NULL,NULL,'ADMIN',3),(4,NULL,NULL,'ESTUDANTE',4),(5,NULL,NULL,'ESTUDANTE',5),(6,NULL,NULL,'ESTUDANTE',6),(7,NULL,NULL,'ESTUDANTE',7),(9,NULL,NULL,'ESTUDANTE',9),(10,NULL,NULL,'ESTUDANTE',10),(12,NULL,NULL,'FUNCIONARIO',12);
+INSERT INTO `perfil_utilizador` VALUES (1,NULL,NULL,'ADMIN',1),(3,NULL,NULL,'ADMIN',3),(4,NULL,NULL,'ESTUDANTE',4),(5,NULL,NULL,'ESTUDANTE',5),(6,NULL,NULL,'ESTUDANTE',6),(7,NULL,NULL,'ESTUDANTE',7),(9,NULL,NULL,'ESTUDANTE',9),(10,NULL,NULL,'ESTUDANTE',10),(12,NULL,NULL,'FUNCIONARIO',12),(13,NULL,NULL,'ESTUDANTE',13),(14,NULL,NULL,'FUNCIONARIO',14);
 /*!40000 ALTER TABLE `perfil_utilizador` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -589,8 +592,8 @@ CREATE TABLE `professor` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   `nivel_academico` varchar(255) DEFAULT NULL,
-  `tipo_professor` varchar(255) DEFAULT NULL,
   `id_cargo_fk` bigint DEFAULT NULL,
+  `nome_professor` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FKpdv2inyd9x17tbdsu9t9m97eo` (`id_cargo_fk`),
   CONSTRAINT `FKpdv2inyd9x17tbdsu9t9m97eo` FOREIGN KEY (`id_cargo_fk`) REFERENCES `cargo` (`id_cargo`)
@@ -661,7 +664,7 @@ CREATE TABLE `utilizador` (
 
 LOCK TABLES `utilizador` WRITE;
 /*!40000 ALTER TABLE `utilizador` DISABLE KEYS */;
-INSERT INTO `utilizador` VALUES (1,NULL,NULL,_binary '',_binary '','1ca6ebfa-c706-4d6b-a061-09290d7c8289',_binary '','admin@coder.com',_binary '','admin','$2a$10$GYH9LUInZew446DNGhitV.feqesw6chhQg8wTAKGfpI.IqeVPG1xG','admin','admin'),(3,NULL,NULL,_binary '',_binary '','56b0a66f-43ff-4469-b805-28e68c37cae9',_binary '','apj@coder.com',_binary '','apj','$2a$10$StvSpp.lgQg/9iTDhFj9tOCMTPe/4HRpgbJpSRF.0rXDV8lPDgxwK','apj123','apj'),(4,NULL,NULL,_binary '',_binary '','a2c11730-dfff-4cdf-accc-594d42bc1ccf',_binary '','jose@coder.com',_binary '','Jose Antonio','$2a$10$0ar.lnxe8dnXjg4lCNWOzOI78WB5yfjhBVbwkwr43S2HRYlUgxn7e','jose123','Jose Antonio'),(5,NULL,NULL,_binary '',_binary '','990e6098-54a3-44ab-959d-4643a632c9be',_binary '','pedro@coder.com',_binary '','Pedro Salvador','$2a$10$h3qn1z1a83M/bOQJ6wHY8OVEEsPsu0HYe4l6h6cfPg9T0uAkWip2q','pedro123','Pedro Salvador'),(6,NULL,NULL,_binary '',_binary '','9527df1c-56da-4cd4-bc7d-2e21a94fb022',_binary '','claudia@coder.com',_binary '','Claudia','$2a$10$ESfbDnn7s28kVpFh9sYHde01ZFgn1hYyUpOzCrF3tAPa2j7NAL2O6','claudia123','Claudia'),(7,NULL,NULL,_binary '',_binary '','f60d2bbe-5d40-4105-a1d5-42f98da277ca',_binary '','meek@coder.com',_binary '','Meek Mill','$2a$10$fCscMvdF0ww2cMjWJ60Q0O0oZw4zemnz2TLrwa2joVL9JgIttXHia','meek123','Meek Mill'),(9,NULL,NULL,_binary '',_binary '','9b78b476-29c5-4252-aac9-05053a479155',_binary '','john@coder.com',_binary '','John Due','$2a$10$KGboGYMrijiBMcHVpmvaYuHpFGfFd40cAzQVW1/JXxmwLWXBOSfM.','john123','John Due'),(10,NULL,NULL,_binary '',_binary '','46402ad3-0882-4227-8ecb-b78dcb634312',_binary '','tiago@coder.com',_binary '','Tiago','$2a$10$ySW/qu2BIYSTvLPHBxrFnePk2f2KnUjoWhR.dy8L7D65h7yuT6IlG','tiago123','Tiago'),(12,NULL,NULL,_binary '',_binary '','33b99bd3-8f7d-40d8-8776-af3caa15a0ed',_binary '','mariza@coder.com',_binary '','Mariza Santos','$2a$10$vE8deqv.hchyQTr.grQNX.TTk6LvX1XVsdKz36s4PXMb6s2PF.fWG','mariza123','Mariza Santos');
+INSERT INTO `utilizador` VALUES (1,NULL,NULL,_binary '',_binary '','1ca6ebfa-c706-4d6b-a061-09290d7c8289',_binary '','admin@coder.com',_binary '','admin','$2a$10$GYH9LUInZew446DNGhitV.feqesw6chhQg8wTAKGfpI.IqeVPG1xG','admin','admin'),(3,NULL,NULL,_binary '',_binary '','56b0a66f-43ff-4469-b805-28e68c37cae9',_binary '','apj@coder.com',_binary '','apj','$2a$10$StvSpp.lgQg/9iTDhFj9tOCMTPe/4HRpgbJpSRF.0rXDV8lPDgxwK','apj123','apj'),(4,NULL,NULL,_binary '',_binary '','a2c11730-dfff-4cdf-accc-594d42bc1ccf',_binary '','jose@coder.com',_binary '','Jose Antonio','$2a$10$0ar.lnxe8dnXjg4lCNWOzOI78WB5yfjhBVbwkwr43S2HRYlUgxn7e','jose123','Jose Antonio'),(5,NULL,NULL,_binary '',_binary '','990e6098-54a3-44ab-959d-4643a632c9be',_binary '','pedro@coder.com',_binary '','Pedro Salvador','$2a$10$h3qn1z1a83M/bOQJ6wHY8OVEEsPsu0HYe4l6h6cfPg9T0uAkWip2q','pedro123','Pedro Salvador'),(6,NULL,NULL,_binary '',_binary '','9527df1c-56da-4cd4-bc7d-2e21a94fb022',_binary '','claudia@coder.com',_binary '','Claudia','$2a$10$ESfbDnn7s28kVpFh9sYHde01ZFgn1hYyUpOzCrF3tAPa2j7NAL2O6','claudia123','Claudia'),(7,NULL,NULL,_binary '',_binary '','f60d2bbe-5d40-4105-a1d5-42f98da277ca',_binary '','meek@coder.com',_binary '','Meek Mill','$2a$10$fCscMvdF0ww2cMjWJ60Q0O0oZw4zemnz2TLrwa2joVL9JgIttXHia','meek123','Meek Mill'),(9,NULL,NULL,_binary '',_binary '','9b78b476-29c5-4252-aac9-05053a479155',_binary '','john@coder.com',_binary '','John Due','$2a$10$KGboGYMrijiBMcHVpmvaYuHpFGfFd40cAzQVW1/JXxmwLWXBOSfM.','john123','John Due'),(10,NULL,NULL,_binary '',_binary '','46402ad3-0882-4227-8ecb-b78dcb634312',_binary '','tiago@coder.com',_binary '','Tiago','$2a$10$ySW/qu2BIYSTvLPHBxrFnePk2f2KnUjoWhR.dy8L7D65h7yuT6IlG','tiago123','Tiago'),(12,NULL,NULL,_binary '',_binary '','33b99bd3-8f7d-40d8-8776-af3caa15a0ed',_binary '','mariza@coder.com',_binary '','Mariza Santos','$2a$10$vE8deqv.hchyQTr.grQNX.TTk6LvX1XVsdKz36s4PXMb6s2PF.fWG','mariza123','Mariza Santos'),(13,NULL,NULL,_binary '',_binary '','8a3c3fde-05a6-43fc-a8d6-4a08509adae3',_binary '','mary@coder.com',_binary '','Maria Isabel','$2a$10$jF1vQuAWWxhwQJj3soD3gODYPmkXeoHgKbgITF5hGeHToR51OcI46','mary123','Maria Isabel'),(14,NULL,NULL,_binary '',_binary '','e3905253-3ec3-452e-a86c-f974faaa1e09',_binary '','joao@coder.com',_binary '','Joao Pelembe','$2a$10$dHKqBoWMHW4SomTDUlXZIe1yEQhNsQKBTwbzRliYjKBIpJxvu7cxO','joao123','Joao Pelembe');
 /*!40000 ALTER TABLE `utilizador` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -674,4 +677,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-06-09  0:24:24
+-- Dump completed on 2022-06-09 23:46:41

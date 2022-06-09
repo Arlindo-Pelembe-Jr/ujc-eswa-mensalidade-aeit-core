@@ -2,6 +2,7 @@ package com.ujc.eswa.mensalidade.aeit.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -21,11 +22,13 @@ import com.ujc.eswa.mensalidade.aeit.exception.ResourceNotFoundException;
 import com.ujc.eswa.mensalidade.aeit.model.Curso;
 import com.ujc.eswa.mensalidade.aeit.model.Estudante;
 import com.ujc.eswa.mensalidade.aeit.model.Funcionario;
+import com.ujc.eswa.mensalidade.aeit.model.Pagamento;
 import com.ujc.eswa.mensalidade.aeit.model.Perfil;
 import com.ujc.eswa.mensalidade.aeit.model.PerfilUtilizador;
 import com.ujc.eswa.mensalidade.aeit.model.Utilizador;
 import com.ujc.eswa.mensalidade.aeit.repository.EstudanteRepository;
 import com.ujc.eswa.mensalidade.aeit.repository.FuncionarioRepository;
+import com.ujc.eswa.mensalidade.aeit.repository.PagamentoRepository;
 import com.ujc.eswa.mensalidade.aeit.repository.PerfilUtilizadorRepository;
 import com.ujc.eswa.mensalidade.aeit.repository.UtilizadorRepository;
 import com.ujc.eswa.mensalidade.aeit.service.UtilizadorService;
@@ -45,9 +48,11 @@ public class UtilizadorController {
 
 	@Autowired
 	private PerfilUtilizadorRepository perfilUtilizadorRepository;
-	
+
 	@Autowired
 	private UtilizadorService utilizadorService;
+	@Autowired
+	private PagamentoRepository pagamentoRepository;
 	@GetMapping
 	public ResponseEntity<List<Utilizador>> getAllUsers() {
 //		 userRepository.findAll();
@@ -88,7 +93,7 @@ public class UtilizadorController {
 //		utilizador.setTextPassword(utilizador.getSenha());
 //		return utilizadorRepository.save(utilizador);
 //	}
-	
+
 	@PostMapping("/api/v1/auth/signup")
 	public ResponseEntity<?> signup(@RequestBody SignupRequestDTO requestDTO) throws Exception {
 		Utilizador user = utilizadorService.registerUser(requestDTO);
@@ -108,16 +113,17 @@ public class UtilizadorController {
 
 	@SuppressWarnings("unchecked")
 	@PostMapping("/role")
-	public ResponseEntity<Map<String, Object>> siginBasedRole(@RequestBody Map<String, Object> userRole) throws Exception  {
-		
+	public ResponseEntity<Map<String, Object>> siginBasedRole(@RequestBody Map<String, Object> userRole)
+			throws Exception {
+
 		System.out.println("userRole RequestBody: " + userRole);
 		List<Map<String, Object>> dataResponse = new ArrayList<>();
 //		System.out.println("To create current user: "+utilizador.getUserName());
 		Map<String, Object> userMap = (Map<String, Object>) userRole.get("utilizador");
-		
+
 		System.out.println("user: " + userMap);
 
-		SignupRequestDTO createdUser= new SignupRequestDTO();
+		SignupRequestDTO createdUser = new SignupRequestDTO();
 		createdUser.setNome(userMap.get("nome").toString());
 		createdUser.setSenha(userMap.get("senha").toString());
 		createdUser.setEmail(userMap.get("email").toString());
@@ -130,54 +136,58 @@ public class UtilizadorController {
 		createdUser.setPerfilUtilizador(perfilUtilizador);
 //		perfilUtilizador.setUtilizador(createdUser);
 //			createdUser=	utilizadorRepository.save(createdUser);
-	
-		
-			
-			System.out.println(createdUser);
-			Utilizador newUSer=new Utilizador();
-			newUSer=utilizadorService.registerUser( createdUser);
-			System.out.println("created User "+newUSer);
-			Estudante createdStudent=new Estudante();
-			Funcionario createdFuncionario = new Funcionario();
 
-				switch (perfilUitliMap.get("perfil").toString()) {
-				case "ADMIN":
-					
-					break;
-case "ESTUDANTE":
-	Map<String, Object> studentMap = (Map<String, Object>) userRole.get("estudante");
-	System.out.println("studentMap: " + studentMap);
-	
-	
-	createdStudent.setNome(studentMap.get("nome").toString());
-	createdStudent.setContacto(Long.parseLong(studentMap.get("contacto").toString()));
-	createdStudent.setData_nascimento(studentMap.get("dataNascimento").toString());
-	createdStudent.setData_ingresso(studentMap.get("dataIngresso").toString());
-	createdStudent.setNacionalidade(studentMap.get("nacionalidade").toString());
-	createdStudent.setEmail(studentMap.get("email").toString());
-	createdStudent.setCod_estudante(estudanteRepository.findMaxCodEstudante()+1);
-	Map<String, Object> cursoMap = (Map<String, Object>) studentMap.get("curso");
+		System.out.println(createdUser);
+		Utilizador newUSer = new Utilizador();
+		newUSer = utilizadorService.registerUser(createdUser);
+		System.out.println("created User " + newUSer);
+		Estudante createdStudent = new Estudante();
+		Funcionario createdFuncionario = new Funcionario();
 
-	createdStudent.setCurso(new Curso(Long.parseLong(cursoMap.get("cursoCodigo").toString()) ) );
-	createdStudent.setUtilizador(newUSer);
-	createdStudent = estudanteRepository.save(createdStudent);
-	System.out.println("created student "+createdStudent);
-					break;
-case "FUNCIONARIO":Map<String, Object> funcionarioMap = (Map<String, Object>) userRole.get("funcionario");
-System.out.println("studentMap: " + funcionarioMap);
+		switch (perfilUitliMap.get("perfil").toString()) {
+		case "ADMIN":
 
-createdFuncionario.setNome(funcionarioMap.get("nome").toString());
-createdFuncionario.setContacto(Long.parseLong(funcionarioMap.get("contacto").toString()));
-createdFuncionario.setDataNascimento(funcionarioMap.get("dataNascimento").toString());
-createdFuncionario.setNacionalidade(funcionarioMap.get("nacionalidade").toString());
-createdFuncionario.setEmail(funcionarioMap.get("email").toString());
-createdFuncionario.setUtilizador(newUSer);
-createdFuncionario=funcionarioRepository.save(createdFuncionario);
-	break;
-				default:
-					break;
-				}
-	
+			break;
+		case "ESTUDANTE":
+			Map<String, Object> studentMap = (Map<String, Object>) userRole.get("estudante");
+			System.out.println("studentMap: " + studentMap);
+
+			createdStudent.setNome(studentMap.get("nome").toString());
+			createdStudent.setContacto(Long.parseLong(studentMap.get("contacto").toString()));
+			createdStudent.setData_nascimento(studentMap.get("dataNascimento").toString());
+			createdStudent.setData_ingresso(studentMap.get("dataIngresso").toString());
+			createdStudent.setNacionalidade(studentMap.get("nacionalidade").toString());
+			createdStudent.setEmail(studentMap.get("email").toString());
+			createdStudent.setCod_estudante(estudanteRepository.findMaxCodEstudante() + 1);
+			Map<String, Object> cursoMap = (Map<String, Object>) studentMap.get("curso");
+
+			createdStudent.setCurso(new Curso(Long.parseLong(cursoMap.get("cursoCodigo").toString())));
+			createdStudent.setUtilizador(newUSer);
+			createdStudent = estudanteRepository.save(createdStudent);
+			System.out.println("created student " + createdStudent);
+			for (int i = 0; i < 5; i++) {
+					Pagamento pagamento = new Pagamento();
+					pagamento.setEstudante(createdStudent);
+					pagamento.setStatus((long) 1);
+					pagamentoRepository.save(pagamento);
+			}
+			break;
+		case "FUNCIONARIO":
+			Map<String, Object> funcionarioMap = (Map<String, Object>) userRole.get("funcionario");
+			System.out.println("studentMap: " + funcionarioMap);
+
+			createdFuncionario.setNome(funcionarioMap.get("nome").toString());
+			createdFuncionario.setContacto(Long.parseLong(funcionarioMap.get("contacto").toString()));
+			createdFuncionario.setDataNascimento(funcionarioMap.get("dataNascimento").toString());
+			createdFuncionario.setNacionalidade(funcionarioMap.get("nacionalidade").toString());
+			createdFuncionario.setEmail(funcionarioMap.get("email").toString());
+			createdFuncionario.setUtilizador(newUSer);
+			createdFuncionario = funcionarioRepository.save(createdFuncionario);
+			break;
+		default:
+			break;
+		}
+
 //		Map<String, Object> perfilUitliMap = (Map<String, Object>) userRole.get("perfilUtilizador");
 
 //		System.out.println("perfilUtilizador: " + perfilUitliMap);
